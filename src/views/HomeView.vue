@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useResources } from '../composables/useResources'
 import { useUserState } from '../composables/useUserState'
 import { statsFor } from '../utils/stats'
@@ -7,12 +7,17 @@ import HomeBanner from '../components/HomeBanner.vue'
 import HomeToolbar from '../components/HomeToolbar.vue'
 import CourseCard from '../components/CourseCard.vue'
 import topics from '../data/topics.json'
+import {previewCollections} from '../utils/collectionPreview.mjs'
 
 const { home, resources } = useResources()
 const { bookmarks } = useUserState()
 const emit = defineEmits<{ (e: 'learning'): void }>()
 
 const SORTS = ['fav', 'recommend', 'hot', 'new']
+const expandedLayers = ref<string[]>([])
+function toggleLayer(label:string) {
+  expandedLayers.value = expandedLayers.value.includes(label) ? expandedLayers.value.filter(x=>x!==label) : [...expandedLayers.value,label]
+}
 const factorySections = computed(() => {
   if (home.topic !== 'ai-dc') return []
   const sections = topics.find(t => t.id === 'ai-dc')?.sections ?? []
@@ -48,14 +53,13 @@ const emptyHint = computed(() =>
     <HomeBanner />
     <HomeToolbar @learning="emit('learning')" />
     <div v-if="home.topic === 'ai-dc'" class="factory">
-      <section v-for="(section, index) in factorySections" :id="`factory-${section.label}`" :key="section.label" class="factory-section" :aria-label="section.label">
+      <section v-for="section in factorySections" :id="`factory-${section.label}`" :key="section.label" class="factory-section" :aria-label="section.label">
         <header class="section-heading">
-          <span class="section-number">{{ String(index + 1).padStart(2, '0') }}</span>
           <h2>{{ section.label }}</h2>
-          <span class="section-english">{{ section.title }}</span>
+          <button v-if="section.resources.length>4" class="view-all" :aria-expanded="expandedLayers.includes(section.label)" :aria-controls="`collections-${section.label}`" @click="toggleLayer(section.label)">{{ expandedLayers.includes(section.label)?'收起':'查看全部' }} <span aria-hidden="true">{{ expandedLayers.includes(section.label)?'⌃':'›' }}</span></button>
         </header>
-        <div v-if="section.resources.length" class="factory-row">
-          <CourseCard v-for="r in section.resources" :key="r.id" :resource="r" compact />
+        <div v-if="section.resources.length" :id="`collections-${section.label}`" class="factory-row">
+          <CourseCard v-for="r in previewCollections(section.resources,expandedLayers.includes(section.label))" :key="r.id" :resource="r" compact />
         </div>
         <p v-else class="section-empty">{{ home.query ? '没有匹配的合集，试试其他关键词。' : '优质合集筹备中，敬请期待。' }}</p>
       </section>
@@ -68,16 +72,16 @@ const emptyHint = computed(() =>
 </template>
 
 <style scoped>
-.factory-section{display:grid;grid-template-columns:160px minmax(0,1fr);gap:24px;padding:26px 0;border-bottom:1px solid var(--border);scroll-margin-top:90px}
-.section-heading{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:10px;border-left:3px solid var(--accent);padding-left:16px}
-.section-number{border-radius:7px;background:var(--accent);color:white;padding:3px 10px;font-size:15px;font-weight:700}
-.section-heading h2{font-size:24px;margin:0;color:var(--ink);line-height:1.3}
-.section-english{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
-.factory-row{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 36px)/3);gap:18px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x proximity}
-.factory-row>*{scroll-snap-align:start;min-width:0}
+.factory-section{padding:22px 0 24px;border-bottom:1px solid var(--border);scroll-margin-top:90px}
+.section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;min-height:30px}
+.section-heading h2{font-size:20px;margin:0;color:var(--ink);line-height:1.3}
+.view-all{border:1px solid var(--border);border-radius:8px;padding:6px 11px;background:var(--surface);color:var(--ink-2);font-size:12px;cursor:pointer;white-space:nowrap}
+.view-all:hover{border-color:var(--accent-line);color:var(--accent-ink)}
+.view-all span{margin-left:5px}
+.factory-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:start}
+.factory-row>*{min-width:0}
 .section-empty{padding:24px;color:var(--muted);background:var(--surface);border:1px dashed var(--border-strong);border-radius:12px;font-size:14px;margin:0}
-@media(max-width:900px){.factory-section{grid-template-columns:120px minmax(0,1fr);gap:16px}.factory-row{grid-auto-columns:calc((100% - 18px)/2)}}
-@media(max-width:620px){.factory-section{display:block;scroll-margin-top:75px}.section-heading{flex-direction:row;align-items:center;margin-bottom:14px;gap:10px;padding-left:10px}.section-heading h2{font-size:18px}.section-english{font-size:10px}.factory-row{grid-auto-columns:78%;gap:12px}}
+@media(max-width:620px){.factory-section{scroll-margin-top:75px;padding:18px 0}.section-heading h2{font-size:18px}.factory-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
 .home {
   padding-bottom: 40px;
 }
