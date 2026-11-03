@@ -4,6 +4,7 @@ import TopNav from './components/TopNav.vue'
 import HomeView from './views/HomeView.vue'
 import LearningCenter from './views/LearningCenter.vue'
 import LearningPlayer from './components/LearningPlayer.vue'
+import LearningPet from './components/LearningPet.vue'
 
 const view = ref('home')
 
@@ -26,6 +27,7 @@ function scrollTop() {
   </main>
 
   <LearningPlayer />
+  <LearningPet />
 
   <footer class="foot">
     稼先社区 AI 学习频道 · 视频课程首页 · 纯前端演示 · 已上架 56 个视频合集（基础 / 应用 / 开发 / 前沿）

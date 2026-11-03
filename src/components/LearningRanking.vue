@@ -3,6 +3,7 @@ import {computed,ref} from 'vue'
 import {useLearning,timeLabel} from '../composables/useLearning'
 import {rankLearners} from '../utils/ranking.mjs'
 const {state,today,month}=useLearning()
+const emit=defineEmits<{(e:'print'):void}>()
 const period=ref('today'),rules=ref(false),limit=ref(10)
 const mine=computed(()=>period.value==='today'?(state.seconds[today.value]||0):Object.entries(state.seconds).filter(([day])=>day.startsWith(month.value+'-')).reduce((sum,[,seconds])=>sum+seconds,0))
 // Explicit local fixtures, never presented as real employee activity.
@@ -15,7 +16,7 @@ const myRank=computed(()=>ranking.value.find(r=>r.isMe)?.rank)
   <div class="period-tabs"><button :class="{on:period==='today'}" @click="period='today';limit=10">今日排名</button><button :class="{on:period==='month'}" @click="period='month';limit=10">本月排名</button><span>{{ period==='today'?today:month }} · 北京时间</span></div>
   <div class="my-rank"><div><span>{{ period==='today'?'今日':'本月' }}我的排名</span><strong>{{ myRank?`第 ${myRank} 名`:'暂未上榜' }}</strong></div><div><span>{{ period==='today'?'今日':'本月' }}学习时长</span><strong>{{ timeLabel(mine) }}</strong></div><p>{{ mine?'再学一点点，向前进一步。':'完成一次模拟学习，就能查看你的排名。' }}</p></div>
   <div v-if="rules" class="rules"><h3>月度学习奖励</h3><table><thead><tr><th>月榜名次</th><th>奖励</th></tr></thead><tbody><tr><td>第1—10名</td><td>可定制3D打印手办＋稼啡码＋书</td></tr><tr><td>第11—20名</td><td>书＋稼啡码</td></tr><tr><td>第21—100名</td><td>稼啡码 × 2</td></tr></tbody></table><ul><li>每月前100名按对应档位获得奖励，不叠加。今日榜不单独发奖。</li><li>按北京时间自然月累计有效学习时长，月末结算，核验后发放。</li><li>模拟榜仅演示排序与当前排名，不是真实员工数据，不用于发奖。</li><li>正式榜仅计入可核验的播放时长，暂停、后台、拖动及多端重复时长不计入。</li><li>演示同秒数并列排名。正式同分、异常学习与获奖资格规则待运营确认。</li></ul></div>
-  <div class="reward-preview"><span>月榜前100名有礼</span><p>1—10名：定制3D手办＋稼啡码＋书　<br/>11—20名：书＋稼啡码　<br/>21—100名：稼啡码×2</p></div>
+  <div class="reward-preview"><span>月榜前100名有礼</span><p>1—10名：定制3D手办＋稼啡码＋书　<button class="print-link" @click="emit('print')">3D打印屋 ›</button><br/>11—20名：书＋稼啡码　<br/>21—100名：稼啡码×2</p></div>
   <table class="rank-table"><thead><tr><th>排名</th><th>学习者</th><th>有效学习时长（演示）</th></tr></thead><tbody><tr v-for="person in ranking.slice(0,limit)" :key="person.id" :class="{self:person.isMe}"><td><span :class="{medal:person.rank<=3}">{{ String(person.rank).padStart(2,'0') }}</span></td><td><span class="avatar">{{ person.isMe?'我':'学' }}</span>{{ person.name }} <small>{{ person.isMe?'本机记录':'模拟用户' }}</small></td><td>{{ timeLabel(person.seconds) }}</td></tr></tbody></table>
   <button v-if="limit<100" class="more" @click="limit=100">展开前100名</button><button v-else class="more" @click="limit=10">收起榜单</button>
   <p class="ranking-note">当前排名由本机演示学习时长与120位模拟用户比较生成。实际全站榜需接入服务端统计。</p>
