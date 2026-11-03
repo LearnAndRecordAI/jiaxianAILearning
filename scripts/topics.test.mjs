@@ -11,7 +11,9 @@ test('hot topics curate distinct AI DC and office collections without missing ID
   const ids = new Set(resources.map(r => r.id))
   assert.deepEqual(topics.map(t => t.id), ['ai-dc', 'office'])
   assert.equal(topics[0].label, 'AI算力工厂')
-  assert.deepEqual(topics[0].sections.map(s => s.label), ['算', '网', '基', '电', '云', '储'])
+  assert.deepEqual(topics[0].sections.map(s => s.label), ['应用层', '模型层', '基础设施层', '芯片层', '能源层'])
+  assert.ok(topics[0].sections[0].resourceIds.includes('tools-09'))
+  assert.ok(topics[0].sections[1].resourceIds.includes('basics-03'))
   const groupedIds = topics[0].sections.flatMap(s => s.resourceIds)
   assert.ok(topics[0].resourceIds.every(id => groupedIds.includes(id)), 'every factory collection remains discoverable')
   for (const section of topics[0].sections) {

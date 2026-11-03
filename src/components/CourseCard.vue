@@ -8,7 +8,7 @@ import { shareResource } from '../utils/share'
 import { boardMap } from '../data/boards'
 import { useLearning } from '../composables/useLearning'
 
-const props = defineProps<{ resource: Resource }>()
+const props = defineProps<{ resource: Resource; compact?: boolean }>()
 const { isBookmarked, toggleBookmark } = useUserState()
 const learning = useLearning()
 
@@ -41,7 +41,7 @@ async function onShare() {
 </script>
 
 <template>
-  <article class="card">
+  <article class="card" :class="{ compact }">
     <div class="cover" :class="{ clickable: hasUrl }" @click="open">
       <img v-if="cover" :src="cover" class="photo" alt="" loading="lazy" />
       <span class="mt">{{ mediaTag }}</span>
@@ -81,6 +81,11 @@ async function onShare() {
 </template>
 
 <style scoped>
+.compact .summary,.compact .meta,.compact .acts,.compact .resource-details{display:none}
+.compact .cbody{padding:10px 12px;gap:0}
+.compact .title{font-size:13px;min-height:35px}
+.compact .play{left:auto;top:10px;right:10px;transform:none;width:28px;height:28px}
+.compact .mt{display:none}
 .resource-details { font-size: 12px; line-height: 1.7; margin: 8px 0; }
 .resource-details summary { cursor: pointer; color: var(--accent-ink); }
 .resource-details p { margin: 6px 0; }

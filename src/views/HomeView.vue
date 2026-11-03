@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useResources } from '../composables/useResources'
 import { useUserState } from '../composables/useUserState'
 import { statsFor } from '../utils/stats'
@@ -13,12 +13,17 @@ const { bookmarks } = useUserState()
 const emit = defineEmits<{ (e: 'learning'): void }>()
 
 const SORTS = ['fav', 'recommend', 'hot', 'new']
+const selectedLayer = ref('应用层')
+function jumpToLayer(label: string) {
+  selectedLayer.value = label
+  document.getElementById(`factory-${label}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
 const factorySections = computed(() => {
   if (home.topic !== 'ai-dc') return []
   const sections = topics.find(t => t.id === 'ai-dc')?.sections ?? []
   return sections.map(section => ({
     ...section,
-    resources: list.value.filter(resource => section.resourceIds.includes(resource.id)),
+    resources: section.resourceIds.flatMap(id => list.value.filter(resource => resource.id === id)),
   }))
 })
 
@@ -48,18 +53,17 @@ const emptyHint = computed(() =>
     <HomeBanner />
     <HomeToolbar @learning="emit('learning')" />
     <div v-if="home.topic === 'ai-dc'" class="factory">
-      <header class="factory-heading">
-        <h1>AI算力工厂</h1>
-        <p>从芯片到集群，看懂算、网、基、电、云、储</p>
-      </header>
-      <section v-for="section in factorySections" :key="section.label" class="factory-section" :aria-label="section.title">
+      <nav class="layer-tabs" aria-label="五层分类导航">
+        <button v-for="section in factorySections" :key="section.label" :class="{ selected: selectedLayer === section.label }" :aria-pressed="selectedLayer === section.label" @click="jumpToLayer(section.label)">{{ section.label }}</button>
+      </nav>
+      <section v-for="(section, index) in factorySections" :id="`factory-${section.label}`" :key="section.label" class="factory-section" :aria-label="section.label">
         <header class="section-heading">
-          <span class="section-symbol">{{ section.label }}</span>
-          <h2>{{ section.title }}</h2>
-          <span class="section-count">{{ section.resources.length }} 个合集</span>
+          <span class="section-number">{{ String(index + 1).padStart(2, '0') }}</span>
+          <h2>{{ section.label }}</h2>
+          <span class="section-english">{{ section.title }}</span>
         </header>
         <div v-if="section.resources.length" class="factory-row">
-          <CourseCard v-for="r in section.resources" :key="r.id" :resource="r" />
+          <CourseCard v-for="r in section.resources" :key="r.id" :resource="r" compact />
         </div>
         <p v-else class="section-empty">{{ home.query ? '没有匹配的合集，试试其他关键词。' : '优质合集筹备中，敬请期待。' }}</p>
       </section>
@@ -72,19 +76,19 @@ const emptyHint = computed(() =>
 </template>
 
 <style scoped>
-.factory-heading{padding:24px 0 12px}
-.factory-heading h1{font-size:26px;margin:0 0 8px;color:var(--ink)}
-.factory-heading p{color:var(--muted);font-size:14px;margin:0}
-.factory-section{padding:22px 0 28px;border-bottom:1px solid var(--border)}
-.section-heading{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.section-symbol{display:grid;place-items:center;width:44px;height:44px;border-radius:13px;background:var(--surface-3);color:var(--accent-ink);border:1px solid var(--accent-line);font-size:23px;font-weight:700;flex:none}
-.section-heading h2{font-size:18px;margin:0;color:var(--ink)}
-.section-count{margin-left:auto;font-size:13px;color:var(--muted)}
-.factory-row{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 54px)/4);gap:18px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x proximity}
+.layer-tabs{display:flex;gap:14px;padding:22px 0;overflow-x:auto;border-bottom:1px solid var(--border)}
+.layer-tabs button{flex:1;min-width:115px;border-radius:24px;border:1px solid var(--border-strong);background:var(--surface-2);color:var(--ink);padding:11px 20px;font-weight:600;cursor:pointer}
+.layer-tabs button.selected{background:var(--accent);border-color:var(--accent);color:white}
+.factory-section{display:grid;grid-template-columns:160px minmax(0,1fr);gap:24px;padding:26px 0;border-bottom:1px solid var(--border);scroll-margin-top:90px}
+.section-heading{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:10px;border-left:3px solid var(--accent);padding-left:16px}
+.section-number{border-radius:7px;background:var(--accent);color:white;padding:3px 10px;font-size:15px;font-weight:700}
+.section-heading h2{font-size:24px;margin:0;color:var(--ink);line-height:1.3}
+.section-english{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.factory-row{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 36px)/3);gap:18px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x proximity}
 .factory-row>*{scroll-snap-align:start;min-width:0}
 .section-empty{padding:24px;color:var(--muted);background:var(--surface);border:1px dashed var(--border-strong);border-radius:12px;font-size:14px;margin:0}
-@media(max-width:900px){.factory-row{grid-auto-columns:calc((100% - 36px)/3)}}
-@media(max-width:620px){.factory-row{grid-auto-columns:78%;gap:12px}.factory-heading h1{font-size:22px}.section-heading h2{font-size:16px}}
+@media(max-width:900px){.factory-section{grid-template-columns:120px minmax(0,1fr);gap:16px}.factory-row{grid-auto-columns:calc((100% - 18px)/2)}}
+@media(max-width:620px){.factory-section{display:block;scroll-margin-top:75px}.section-heading{flex-direction:row;align-items:center;margin-bottom:14px;gap:10px;padding-left:10px}.section-heading h2{font-size:18px}.section-english{font-size:10px}.factory-row{grid-auto-columns:78%;gap:12px}.layer-tabs{gap:8px}.layer-tabs button{min-width:100px;padding:9px 14px}}
 .home {
   padding-bottom: 40px;
 }

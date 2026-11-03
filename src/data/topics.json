@@ -2,15 +2,14 @@
   {
     "id": "ai-dc",
     "label": "AI算力工厂",
-    "description": "算力与数据中心",
-    "resourceIds": ["basics-12", "basics-13", "basics-14", "basics-15", "basics-16", "basics-17", "basics-18", "basics-19", "basics-20", "basics-21"],
+    "description": "应用、模型、基础设施、芯片、能源",
+    "resourceIds": ["tools-09", "tools-06", "dev-11", "basics-03", "dev-10", "dev-14", "basics-12", "basics-13", "basics-14", "basics-15", "basics-16", "basics-17", "basics-18", "basics-19", "basics-20", "basics-21"],
     "sections": [
-      { "label": "算", "title": "算力与芯片", "resourceIds": ["basics-19", "basics-13", "basics-14", "basics-20"] },
-      { "label": "网", "title": "集群互联", "resourceIds": ["basics-15", "basics-13", "basics-14"] },
-      { "label": "基", "title": "机房与设施", "resourceIds": ["basics-18", "basics-16", "basics-21", "basics-12"] },
-      { "label": "电", "title": "供电与能效", "resourceIds": ["basics-16", "basics-21"] },
-      { "label": "云", "title": "云平台与调度", "resourceIds": [] },
-      { "label": "储", "title": "存储与数据", "resourceIds": ["basics-17", "basics-12"] }
+      { "label": "应用层", "title": "APPLICATIONS", "resourceIds": ["tools-09", "tools-06", "dev-11"] },
+      { "label": "模型层", "title": "MODELS", "resourceIds": ["basics-03", "dev-10", "dev-14"] },
+      { "label": "基础设施层", "title": "INFRASTRUCTURE", "resourceIds": ["basics-15", "basics-13", "basics-14", "basics-18", "basics-20"] },
+      { "label": "芯片层", "title": "CHIPS", "resourceIds": ["basics-19", "basics-17", "basics-12"] },
+      { "label": "能源层", "title": "ENERGY", "resourceIds": ["basics-16", "basics-21"] }
     ]
   },
   {
