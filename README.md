@@ -23,6 +23,6 @@ npm run dev -- --port 5174
 
 资源数据：`src/data/resources.ts`；封面：`src/assets/covers`。第三方课程、封面及商标权利归原权利人所有，本仓库不提供第三方视频再分发授权。不包含下载视频、原始表格、内部文档或旧仓库历史。
 
-Cloudflare Pages 部署需配置环境变量 `SITE_PASSWORD`，未配置时拒绝访问；本地 Vite 不使用此中间件。不要将密码提交到 Git。
+Cloudflare Pages 在线预览无需密码，任何获得链接的人都可以访问。不要将密码或其他敏感资料提交到 Git。
 
 部分维护脚本需要外部原始资料，运行 Demo 无需这些资料；可以直接编辑资源数据。Python 导入脚本需另装 openpyxl。
