@@ -25,4 +25,6 @@ npm run dev -- --port 5174
 
 Cloudflare Pages 在线预览无需密码，任何获得链接的人都可以访问。不要将密码或其他敏感资料提交到 Git。
 
+Cloudflare Git 构建配置：生产分支 `main`，构建命令 `npm run build`，输出目录 `dist`，根目录留空。必须发布编译产物，不能直接发布包含 `/src/main.ts` 的源码入口。
+
 部分维护脚本需要外部原始资料，运行 Demo 无需这些资料；可以直接编辑资源数据。Python 导入脚本需另装 openpyxl。
