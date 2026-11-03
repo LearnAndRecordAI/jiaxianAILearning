@@ -46,17 +46,18 @@ function toggleTopic(id: string) {
       >
         {{ b.short }}
       </button>
-      <span class="topic-divider" aria-hidden="true"></span>
+    </div>
+    </div>
+    <div class="topics" aria-label="热门专题">
       <button v-for="topic in topics" :key="topic.id" class="topic" :class="{ selected: home.topic === topic.id }"
         :title="`${topic.description} · ${topic.resourceIds.length}个合集`"
         :aria-pressed="home.topic === topic.id" @click="toggleTopic(topic.id)">
         <span class="topic-name">{{ topic.label }}</span>
       </button>
     </div>
-    </div>
     <div class="search">
       <span class="mag" aria-hidden="true"></span>
-      <input v-model="home.query" type="search" placeholder="Token / Transformer / AI Coding" aria-label="搜索" />
+      <input v-model="home.query" type="search" placeholder="搜索合集" aria-label="搜索" />
     </div>
     <button class="my-learning" @click="emit('learning')">我的学习</button>
   </div>
@@ -64,8 +65,8 @@ function toggleTopic(id: string) {
 
 <style scoped>
 .my-learning{flex:none;white-space:nowrap;border:1px solid var(--accent-line);background:var(--surface-2);color:var(--accent-ink);border-radius:20px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer}
-.menu-strip { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: thin; padding: 3px 0; }
-.topic-divider { height: 18px; width: 1px; background: var(--border); margin: 0 4px; flex: none; }
+.menu-strip { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: thin; padding: 3px 0; }
+.topics { display:flex;align-items:center;gap:8px;flex:none;border-left:1px solid var(--border);padding-left:12px }
 .topic { flex: none; white-space: nowrap; border: 1px solid var(--accent-line); border-radius: 16px; padding: 5px 12px; background: var(--surface-2); color: var(--accent-ink); cursor: pointer; }
 .topic:hover, .topic.selected { border-color: var(--accent); background: var(--surface-3); }
 .topic.selected .topic-name { color: var(--accent-ink); }
@@ -73,13 +74,13 @@ function toggleTopic(id: string) {
 .toolbar {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   margin: 18px 0 6px;
   flex-wrap: nowrap;
 }
 .sorts {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   flex: none;
 }
 .s {
@@ -88,7 +89,7 @@ function toggleTopic(id: string) {
   background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 5px 14px;
+  padding: 5px 10px;
   white-space: nowrap;
 }
 .s:hover {
@@ -102,7 +103,7 @@ function toggleTopic(id: string) {
 }
 .boards {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   flex: none;
   min-width: 0;
   padding-bottom: 2px;
@@ -113,7 +114,7 @@ function toggleTopic(id: string) {
   background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 5px 14px;
+  padding: 5px 10px;
   white-space: nowrap;
 }
 .c:hover {
@@ -126,7 +127,8 @@ function toggleTopic(id: string) {
   font-weight: 700;
 }
 .search {
-  flex: none;
+  flex: 0 1 150px;
+  min-width: 92px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -134,7 +136,7 @@ function toggleTopic(id: string) {
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 7px 14px;
-  width: 230px;
+  width: 150px;
 }
 .search .mag {
   width: 13px;
@@ -161,10 +163,14 @@ function toggleTopic(id: string) {
   color: var(--ink);
   font-size: 13.5px;
   width: 100%;
+  min-width: 0;
 }
 @media (max-width: 720px) {
-  .search {
-    width: 145px;
-  }
+  .toolbar{flex-wrap:wrap}
+  .menu-strip{flex-basis:100%}
+  .topics{border-left:0;padding-left:0}
+  .search{flex:1;min-width:80px;width:100px}
+  .topic{padding:5px 9px}
+  .my-learning{padding:7px 10px}
 }
 </style>
