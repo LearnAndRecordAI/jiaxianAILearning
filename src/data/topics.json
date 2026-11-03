@@ -1,0 +1,14 @@
+[
+  {
+    "id": "ai-dc",
+    "label": "AI DC",
+    "description": "算力与数据中心",
+    "resourceIds": ["basics-12", "basics-13", "basics-14", "basics-15", "basics-16", "basics-17", "basics-18", "basics-19", "basics-20", "basics-21"]
+  },
+  {
+    "id": "office",
+    "label": "AI办公提效",
+    "description": "让AI帮上忙",
+    "resourceIds": ["tools-01", "tools-02", "tools-03", "tools-04", "tools-05", "tools-06", "tools-07", "tools-08", "tools-09"]
+  }
+]

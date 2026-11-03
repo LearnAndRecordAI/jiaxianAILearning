@@ -1,0 +1,99 @@
+/* 设计 token —— 主色蓝 #5E7CE0 + 中性灰。明暗自适应 + 可切换。
+   三态：裸 :root = 浅色；prefers-color-scheme:dark（未显式选择时）；[data-theme] 显式切换。 */
+:root {
+  --ground: #f5f6f8;
+  --surface: #ffffff;
+  --surface-2: #eef0f4;
+  --surface-3: #e6e9ef;
+  --ink: #1b1e26;
+  --ink-2: #5b6270;
+  --muted: #9198a6;
+  --border: #e4e7ec;
+  --border-strong: #d5d9e0;
+  --accent: #5e7ce0;
+  --accent-ink: #4a63c4;
+  --accent-soft: #eaf0fc;
+  --accent-line: #c3d0f5;
+  --live: #f66f6a;
+
+  --l1: #7b7f88;
+  --l2: #6b6f78;
+  --l3: #5b5f68;
+  --l4: #4b4f57;
+  --l5: #3c4047;
+
+  --b-basics: #7f838d;
+  --b-tools: #7f838d;
+  --b-dev: #7f838d;
+  --b-arch: #7f838d;
+  --b-strategy: #7f838d;
+
+  --shadow: 0 1px 2px rgba(27, 30, 38, 0.05), 0 10px 30px -20px rgba(45, 60, 120, 0.26);
+  --shadow-card: 0 1px 2px rgba(27, 30, 38, 0.06), 0 8px 20px -12px rgba(45, 60, 120, 0.22);
+
+  --font-sans: -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui,
+    'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Menlo', monospace;
+
+  --maxw: 1180px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --ground: #12141a;
+    --surface: #1a1d24;
+    --surface-2: #23272f;
+    --surface-3: #2b2f39;
+    --ink: #eceef2;
+    --ink-2: #a6acb8;
+    --muted: #7c8391;
+    --border: #2c3038;
+    --border-strong: #3a3f49;
+    --accent: #7e97ea;
+    --accent-ink: #9bb0f5;
+    --accent-soft: #1e2740;
+    --accent-line: #38436b;
+    --live: #ff8380;
+    --l1: #565b64;
+    --l2: #626771;
+    --l3: #6e737d;
+    --l4: #7a7f89;
+    --l5: #868b95;
+    --b-basics: #656971;
+    --b-tools: #656971;
+    --b-dev: #656971;
+    --b-arch: #656971;
+    --b-strategy: #656971;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 34px -20px rgba(0, 0, 0, 0.7);
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 22px -14px rgba(0, 0, 0, 0.7);
+  }
+}
+
+:root[data-theme='dark'] {
+  --ground: #12141a;
+  --surface: #1a1d24;
+  --surface-2: #23272f;
+  --surface-3: #2b2f39;
+  --ink: #eceef2;
+  --ink-2: #a6acb8;
+  --muted: #7c8391;
+  --border: #2c3038;
+  --border-strong: #3a3f49;
+  --accent: #7e97ea;
+  --accent-ink: #9bb0f5;
+  --accent-soft: #1e2740;
+  --accent-line: #38436b;
+  --live: #ff8380;
+  --l1: #565b64;
+  --l2: #626771;
+  --l3: #6e737d;
+  --l4: #7a7f89;
+  --l5: #868b95;
+  --b-basics: #656971;
+  --b-tools: #656971;
+  --b-dev: #656971;
+  --b-arch: #656971;
+  --b-strategy: #656971;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 34px -20px rgba(0, 0, 0, 0.7);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 22px -14px rgba(0, 0, 0, 0.7);
+}

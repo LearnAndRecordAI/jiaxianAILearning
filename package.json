@@ -1,0 +1,24 @@
+{
+  "name": "jiaxian-ai-learning-demo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "稼先社区 AI 学习频道 · 方案10 视频课程首页 · 纯前端可交互 demo",
+  "scripts": {
+    "test": "node --test scripts/*.test.mjs",
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "gen:data": "node scripts/gen-resources.mjs",
+    "fetch:covers": "node scripts/fetch-covers.mjs"
+  },
+  "dependencies": {
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "typescript": "~5.6.3",
+    "vite": "^6.0.7",
+    "vue-tsc": "^2.2.0"
+  }
+}
