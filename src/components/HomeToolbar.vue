@@ -52,7 +52,7 @@ function toggleTopic(id: string) {
       <button v-for="topic in topics" :key="topic.id" class="topic" :class="{ selected: home.topic === topic.id }"
         :title="`${topic.description} · ${topic.resourceIds.length}个合集`"
         :aria-pressed="home.topic === topic.id" @click="toggleTopic(topic.id)">
-        <span class="topic-name">{{ topic.label }}</span>
+        <span class="topic-name"><span v-if="topic.id === 'ai-dc'" aria-hidden="true">🔥 </span>{{ topic.label }}</span>
       </button>
     </div>
     <div class="search">
