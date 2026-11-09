@@ -6,6 +6,9 @@ export type Board = 'basics' | 'tools' | 'dev' | 'strategy'
 /** L1–L5 难度等级 */
 export type Level = 'L1' | 'L2' | 'L3' | 'L4' | 'L5'
 
+/** 面向全员、按知识点和前置能力评定，不从板块等级推导。 */
+export type Difficulty = '入门' | '基础' | '进阶'
+
 /** 地区来源 */
 export type Region = 'cn' | 'overseas' | 'both'
 
@@ -18,6 +21,8 @@ export interface Resource {
   board: Board
   level: Level
   title: string
+  difficulty: Difficulty
+  difficultyReason: string
   platform: string
   region: Region
   media: Media

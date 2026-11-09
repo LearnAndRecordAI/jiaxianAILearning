@@ -2,6 +2,7 @@
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useLearning, timeLabel } from '../composables/useLearning'
 import { useUserState } from '../composables/useUserState'
+import DifficultyTag from './DifficultyTag.vue'
 const {active, record} = useLearning()
 const {isCompleted,toggleCompleted} = useUserState()
 const playing = ref(false), seconds = ref(0)
@@ -24,7 +25,7 @@ onUnmounted(()=>{clearInterval(timer);document.removeEventListener('visibilitych
   <div v-if="active" class="overlay" @click.self="active=null">
     <section class="player" role="dialog" aria-modal="true" aria-label="合集学习演示" @keydown.esc="active=null">
       <header><span>合集学习演示</span><button @click="active=null" aria-label="关闭学习演示">✕</button></header>
-      <div class="stage"><span class="demo">模拟播放 · 非原视频</span><div class="orb">▶</div><h2>{{ active.title }}</h2><p>点击开始体验3秒自动签到</p><button class="primary" @click="playing=!playing">{{ playing?'暂停模拟播放':'开始模拟播放' }}</button></div>
+      <div class="stage"><span class="demo">模拟播放 · 非原视频</span><div class="orb">▶</div><h2>{{ active.title }} <DifficultyTag :difficulty="active.difficulty" :reason="active.difficultyReason" /></h2><p>点击开始体验3秒自动签到</p><button class="primary" @click="playing=!playing">{{ playing?'暂停模拟播放':'开始模拟播放' }}</button></div>
       <div class="session"><span>本次演示学习 <b>{{ timeLabel(seconds) }}</b></span><span>{{ seconds>=3?'✓ 今日已自动签到':`再播放${Math.max(0,Math.ceil(3-seconds))}秒自动签到` }}</span></div>
       <p class="hint">仅页面可见且模拟播放时计时。外部原视频观看无法统计，正式版需接入播放器。</p>
       <footer><a v-if="active.url" :href="active.url" target="_blank" rel="noopener noreferrer">打开原始资源 ↗</a><button @click="toggleCompleted(active.id)">{{ isCompleted(active.id)?'✓ 已标记学过':'标记该合集已学过' }}</button></footer>

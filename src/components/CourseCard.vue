@@ -7,6 +7,7 @@ import { statsFor } from '../utils/stats'
 import { shareResource } from '../utils/share'
 import { boardMap } from '../data/boards'
 import { useLearning } from '../composables/useLearning'
+import DifficultyTag from './DifficultyTag.vue'
 
 const props = defineProps<{ resource: Resource; compact?: boolean }>()
 const { isBookmarked, toggleBookmark } = useUserState()
@@ -17,7 +18,7 @@ const stats = computed(() => statsFor(props.resource))
 const boardShort = computed(() => boardMap[props.resource.board]?.short ?? '')
 const hasVideo = computed(() => props.resource.media !== 'article')
 const mediaTag = computed(() => (hasVideo.value ? '▶ 视频' : '📄 图文'))
-const displayTitle = computed(() => (props.resource.collection ? `【合集】${props.resource.title}` : props.resource.title))
+const displayTitle = computed(() => props.resource.title)
 const durationLabel = computed(() =>
   props.resource.collection && props.resource.episodes ? `共${props.resource.episodes}集` : stats.value.duration,
 )
@@ -51,12 +52,15 @@ async function onShare() {
       <span class="dur">{{ durationLabel }}</span>
     </div>
     <div class="cbody">
+      <div class="title-row">
       <a v-if="hasUrl" class="title" :href="resource.url" @click.prevent="open">
         <span v-if="resource.collection" class="collection-icon" aria-hidden="true">▤</span>{{ displayTitle }}
       </a>
       <span v-else class="title no-link" :title="'内网资源，待配置播放地址'">
         <span v-if="resource.collection" class="collection-icon" aria-hidden="true">▤</span>{{ displayTitle }}
       </span>
+      <DifficultyTag :difficulty="resource.difficulty" :reason="resource.difficultyReason" />
+      </div>
       <p class="summary">{{ resource.description }}</p>
       <details v-if="resource.videos?.length" class="resource-details">
         <summary>视频目录</summary>
@@ -205,6 +209,8 @@ async function onShare() {
   flex: 1;
 }
 .title {
+  flex: 1;
+  min-width: 0;
   font-size: 14px;
   font-weight: 700;
   line-height: 1.35;
@@ -216,6 +222,8 @@ async function onShare() {
   overflow: hidden;
   min-height: 38px;
 }
+.title-row{display:flex;align-items:flex-start;gap:6px;min-width:0}
+.title-row>.difficulty-tag{margin-top:1px}
 .collection-icon {
   display: inline-block;
   margin-right: 5px;

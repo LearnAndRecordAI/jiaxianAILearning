@@ -9,6 +9,7 @@ import { coverFor } from '../utils/covers'
 import LearningRanking from '../components/LearningRanking.vue'
 import LearningStudio from '../components/LearningStudio.vue'
 import CommunityPoints from '../components/CommunityPoints.vue'
+import DifficultyTag from '../components/DifficultyTag.vue'
 import {useGrowth} from '../composables/useGrowth'
 import {TASK_REWARDS} from '../utils/growth.mjs'
 import mascot from '../assets/mascot/jiaxiaozhi.jpg'
@@ -78,7 +79,7 @@ function reward(tier:number){if(redeem(tier))toast.value=tier===12?'演示领取
       <p class="muted rule">学习类任务按本机演示记录判断，互动类任务须关联个人账号并审核后发奖；匿名内容不计。真实社区积分每天凌晨自动更新，严禁自动刷积分。本Demo不实际发放积分。</p>
     </section>
     <LearningRanking v-else-if="tab==='学习排行榜'" @print="studio=true" />
-    <section v-else class="panel"><div class="section-head"><h2>我的学习足迹</h2><span class="muted">演示时长，仅保存在当前浏览器</span></div><nav class="record-tabs"><button v-for="name in ['最近学习','学过的合集','我的收藏']" :key="name" :class="{selected:recordTab===name}" @click="recordTab=name">{{ name }}</button></nav><p v-if="!list.length" class="empty">这里还没有记录，选一个喜欢的合集开始吧。<button @click="explore()">去学习</button></p><article v-for="r in list" :key="r.id" class="record"><img :src="coverFor(r)" alt=""/><div><h3>{{ r.title }}</h3><p>{{ timeLabel(state.courses[r.id]||0) }}演示学习 · {{ isCompleted(r.id)?'手动标记学过':'尚未标记学过' }}</p></div><div class="record-actions"><button @click="open(r)">继续学习</button><button @click="toggleCompleted(r.id)">{{ isCompleted(r.id)?'取消学过':'标记学过' }}</button></div></article></section>
+<section v-else class="panel"><div class="section-head"><h2>我的学习足迹</h2><span class="muted">演示时长，仅保存在当前浏览器</span></div><nav class="record-tabs"><button v-for="name in ['最近学习','学过的合集','我的收藏']" :key="name" :class="{selected:recordTab===name}" @click="recordTab=name">{{ name }}</button></nav><p v-if="!list.length" class="empty">这里还没有记录，选一个喜欢的合集开始吧。<button @click="explore()">去学习</button></p><article v-for="r in list" :key="r.id" class="record"><img :src="coverFor(r)" alt=""/><div><h3>{{ r.title }} <DifficultyTag :difficulty="r.difficulty" :reason="r.difficultyReason" /></h3><p>{{ timeLabel(state.courses[r.id]||0) }}演示学习 · {{ isCompleted(r.id)?'手动标记学过':'尚未标记学过' }}</p></div><div class="record-actions"><button @click="open(r)">继续学习</button><button @click="toggleCompleted(r.id)">{{ isCompleted(r.id)?'取消学过':'标记学过' }}</button></div></article></section>
     <div v-if="submission" class="scrim" @click.self="submission=''"><section class="submission" role="dialog" aria-modal="true" aria-label="成长任务演示提交"><h2>{{ tasks.find(t=>t.id===submission)?.name }}</h2><p class="muted">本地演示，不会发布到真实社区，提交后等待审核。</p><label for="task-content">学习内容、收获或建议（至少10字）</label><textarea id="task-content" v-model="content" rows="6" maxlength="3000"></textarea><div class="submit-actions"><button @click="submission=''">取消</button><button class="primary" :disabled="content.trim().length<10" @click="submit">提交演示内容</button></div></section></div>
   </div>
 </template>

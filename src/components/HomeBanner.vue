@@ -5,6 +5,7 @@ import { boards } from '../data/boards'
 import { coverFor } from '../utils/covers'
 import type { Resource } from '../types'
 import { useLearning } from '../composables/useLearning'
+import DifficultyTag from './DifficultyTag.vue'
 const learning = useLearning()
 
 // 分页轮播：5 页 = 5 个板块，每页取该板块「前 3 门课」的大卡。
@@ -52,7 +53,7 @@ onBeforeUnmount(stop)
             <span v-if="r.media !== 'article'" class="play" aria-hidden="true"></span>
             <div class="cap">
               <div class="k">{{ r.platform }}</div>
-              <div class="ti">{{ r.title }}</div>
+              <div class="banner-title"><div class="ti">{{ r.title }}</div><DifficultyTag :difficulty="r.difficulty" :reason="r.difficultyReason" /></div>
             </div>
           </a>
         </div>
@@ -72,6 +73,9 @@ onBeforeUnmount(stop)
 </template>
 
 <style scoped>
+.banner-title{display:flex;gap:8px;align-items:flex-start}
+.banner-title .ti{flex:1;min-width:0}
+.banner-title>.difficulty-tag{margin-top:3px}
 .viewport {
   margin-top: 18px;
   overflow: hidden;

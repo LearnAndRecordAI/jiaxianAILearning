@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { resources } from './data/resources'
 import TopNav from './components/TopNav.vue'
 import HomeView from './views/HomeView.vue'
 import LearningCenter from './views/LearningCenter.vue'
@@ -30,7 +31,7 @@ function scrollTop() {
   <LearningPet />
 
   <footer class="foot">
-    稼先社区 AI 学习频道 · 视频课程首页 · 纯前端演示 · 已上架 56 个视频合集（基础 / 应用 / 开发 / 前沿）
+    稼先社区 AI 学习频道 · 视频课程首页 · 纯前端演示 · 已上架 {{ resources.length }} 个视频合集（基础 / 应用 / 开发 / 前沿）
   </footer>
 </template>
 

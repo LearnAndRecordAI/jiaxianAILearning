@@ -4,6 +4,8 @@ import type { Resource } from '../types'
 export const resources: Resource[] = [
   {
     "id": "basics-01",
+    "difficulty": "基础",
+    "difficultyReason": "系统学习微积分、线性代数与概率，需具备高中数学知识。",
     "board": "basics",
     "level": "L1",
     "title": "人工智能-数学基础【微积分、概率论、线性代数、机器学习数学基础】",
@@ -20,6 +22,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-02",
+    "difficulty": "入门",
+    "difficultyReason": "生成式AI能力、边界和使用场景科普，无需编程基础。",
     "board": "basics",
     "level": "L1",
     "title": "吴恩达 Generative AI for Everyone 面向每个人的生成式AI",
@@ -36,6 +40,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-03",
+    "difficulty": "入门",
+    "difficultyReason": "通过动画建立神经网络、注意力和大模型的直观认识。",
     "board": "basics",
     "level": "L1",
     "title": "3个动画让你认识AI大模型底层技术原理",
@@ -51,6 +57,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-04",
+    "difficulty": "基础",
+    "difficultyReason": "串联神经网络、词嵌入与Transformer，建议先了解基础数学。",
     "board": "basics",
     "level": "L1",
     "title": "【Transformer】最强动画讲解",
@@ -66,6 +74,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-05",
+    "difficulty": "进阶",
+    "difficultyReason": "覆盖策略梯度、Actor-Critic和元学习，需机器学习基础。",
     "board": "basics",
     "level": "L1",
     "title": "李宏毅强化学习系列课程",
@@ -81,6 +91,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-06",
+    "difficulty": "基础",
+    "difficultyReason": "系统介绍生成式AI和机器学习，包含训练与评估基本概念。",
     "board": "basics",
     "level": "L1",
     "title": "李宏毅生成式人工智能与机器学习导论【2026最新】",
@@ -96,6 +108,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-07",
+    "difficulty": "进阶",
+    "difficultyReason": "包含多模态对齐融合和代码工具，需深度学习与编程基础。",
     "board": "basics",
     "level": "L1",
     "title": "MIT最新AI神课！《如何用AI搞定几乎所有事》多模态大模型完整12讲",
@@ -111,6 +125,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-08",
+    "difficulty": "入门",
+    "difficultyReason": "以概念串联讲解LLM、Token、MCP与Agent，适合建立全景认知。",
     "board": "basics",
     "level": "L1",
     "title": "从 LLM 到 Agent Skill，一期视频带你打通底层逻辑！",
@@ -127,6 +143,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "tools-01",
+    "difficulty": "基础",
+    "difficultyReason": "涉及环境配置、Skill、Agent及跨工具自动化完整流程。",
     "board": "tools",
     "level": "L2",
     "title": "讲的最细的Codex保姆级教程，5小时从安装配置到功能实战全流程讲透！",
@@ -142,6 +160,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "tools-02",
+    "difficulty": "入门",
+    "difficultyReason": "从零上手办公工具，围绕文档、表格和常见办公任务跟练。",
     "board": "tools",
     "level": "L2",
     "title": "AI办公新手入门 从0到1入门系列",
@@ -157,6 +177,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "tools-03",
+    "difficulty": "基础",
+    "difficultyReason": "涉及Codex配置、工具接入及多个办公自动化环节。",
     "board": "tools",
     "level": "L2",
     "title": "Codex+deepseek完成自动化办公+剪辑+PPT+作图+接入飞书，小白不会代码也能用Codex",
@@ -172,6 +194,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "tools-04",
+    "difficulty": "基础",
+    "difficultyReason": "串联脚本、角色、分镜、音视频与剪辑，是完整制作流程。",
     "board": "tools",
     "level": "L2",
     "title": "即梦+豆包+剪映，2小时快速掌握AI视频制作技巧，手把手教你从0到1制作AI短片！",
@@ -187,6 +211,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-01",
+    "difficulty": "基础",
+    "difficultyReason": "系统学习PyTorch和深度学习基础，需Python和基础数学。",
     "board": "dev",
     "level": "L3",
     "title": "李沐 动手学深度学习V2+实用机器学习 PyTorch版【2026优化版】",
@@ -202,6 +228,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-02",
+    "difficulty": "基础",
+    "difficultyReason": "主要学习AI开发工具安装、配置与使用，需基础开发认知。",
     "board": "dev",
     "level": "L3",
     "title": "AI辅助编程 DeepSeek Harness从入门到精通小白保姆级教程",
@@ -217,6 +245,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-03",
+    "difficulty": "基础",
+    "difficultyReason": "学习模型调用、Tokenizer和微调入门，需Python基础。",
     "board": "dev",
     "level": "L3",
     "title": "2025讲的最好的HuggingFace教程，带你3小时吃透huggingface与Transformers，少走99%的弯路！",
@@ -232,6 +262,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-04",
+    "difficulty": "进阶",
+    "difficultyReason": "覆盖内核优化、并行训练和后训练，需PyTorch及机器学习基础。",
     "board": "dev",
     "level": "L3",
     "title": "2026年最新版 Stanford CS336: 从头构建大语言模型",
@@ -247,6 +279,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-05",
+    "difficulty": "基础",
+    "difficultyReason": "涉及需求规范、编码验证和迭代交付，不能按标题小白字样判为零门槛。",
     "board": "dev",
     "level": "L3",
     "title": "【吴恩达 Vibe Coding课程 】，从入门到进阶，详细讲解，通俗易懂，适合所有零基础小白学习",
@@ -261,6 +295,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-06",
+    "difficulty": "基础",
+    "difficultyReason": "基于Java和Spring完成模型调用、工具调用与RAG应用。",
     "board": "dev",
     "level": "L3",
     "title": "尚硅谷SpringAI实战教程，轻松上手大模型应用开发",
@@ -276,6 +312,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-07",
+    "difficulty": "进阶",
+    "difficultyReason": "涉及Agent机制、模型训练、后训练与评估，需机器学习基础。",
     "board": "dev",
     "level": "L3",
     "title": "2026李宏毅智能体【AI Agent】系列课程全集，公认体验感最好的入门课程！人工智能/机器学习/深度学习/大模型/LLM",
@@ -291,6 +329,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-08",
+    "difficulty": "进阶",
+    "difficultyReason": "研究自改进Agent、强化学习和验证反馈，需LLM研发基础。",
     "board": "dev",
     "level": "L3",
     "title": "2026版首发斯坦福CS329A：自改进AI Agents完整课",
@@ -306,6 +346,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-09",
+    "difficulty": "进阶",
+    "difficultyReason": "面向生产环境讨论部署监控、数据管道和模型质量。",
     "board": "dev",
     "level": "L3",
     "title": "吴恩达 MLOps①生产级 ML",
@@ -321,6 +363,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "strategy-01",
+    "difficulty": "基础",
+    "difficultyReason": "侧重模型能力评测和选型，建议先了解大模型与Agent。",
     "board": "strategy",
     "level": "L4",
     "title": "Jev模型实测",
@@ -336,6 +380,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "strategy-02",
+    "difficulty": "进阶",
+    "difficultyReason": "涉及机器人控制、强化学习及仿真到实机的软硬件协同。",
     "board": "strategy",
     "level": "L4",
     "title": "小鸭子机器人 Microduck硬件架构拆解",
@@ -352,6 +398,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "strategy-03",
+    "difficulty": "进阶",
+    "difficultyReason": "围绕Agent框架插件扩展和工具链配置，需开发与架构基础。",
     "board": "strategy",
     "level": "L4",
     "title": "DeepSeek Harness从入门到进阶",
@@ -367,6 +415,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "strategy-04",
+    "difficulty": "基础",
+    "difficultyReason": "侧重多模态、长上下文与编程能力的模型评测和选型。",
     "board": "strategy",
     "level": "L4",
     "title": "Kimi K3模型实测",
@@ -382,6 +432,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "strategy-05",
+    "difficulty": "基础",
+    "difficultyReason": "围绕模型架构和推理能力评测，需理解基础大模型术语。",
     "board": "strategy",
     "level": "L4",
     "title": "GLM-5.3-Flash牛来模型实测",
@@ -397,6 +449,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-09",
+    "difficulty": "基础",
+    "difficultyReason": "学习微积分和线性代数的数学直觉，不等同零门槛AI工具课。",
     "board": "basics",
     "level": "L1",
     "title": "3Blue1Brown《微积分&线性代数的本质》合集",
@@ -412,6 +466,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-10",
+    "difficulty": "入门",
+    "difficultyReason": "面向非技术用户讲解AI能力、项目流程和企业应用。",
     "board": "basics",
     "level": "L1",
     "title": "吴恩达《AI for Everyone》2026",
@@ -427,6 +483,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-11",
+    "difficulty": "基础",
+    "difficultyReason": "系统学习机器学习、模型结构与训练，需基础编程和数学。",
     "board": "basics",
     "level": "L1",
     "title": "李宏毅2025《机器学习》",
@@ -443,6 +501,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "tools-05",
+    "difficulty": "入门",
+    "difficultyReason": "围绕提示技巧与常见任务使用AI，无需编程基础。",
     "board": "tools",
     "level": "L2",
     "title": "吴恩达《AI Prompting for Everyone》",
@@ -459,6 +519,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "tools-06",
+    "difficulty": "基础",
+    "difficultyReason": "涉及工作模式、Skill、MCP、协作与定时任务配置。",
     "board": "tools",
     "level": "L2",
     "title": "WorkBuddy从入门到精通保姆教程",
@@ -475,6 +537,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "tools-07",
+    "difficulty": "基础",
+    "difficultyReason": "低代码工具入门后搭建插件、工作流、知识库和业务助手。",
     "board": "tools",
     "level": "L2",
     "title": "Coze（扣子）教程：7天从入门到精通",
@@ -491,6 +555,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-10",
+    "difficulty": "进阶",
+    "difficultyReason": "从零实现GPT并复现GPT-2，需要Python和深度学习基础。",
     "board": "dev",
     "level": "L3",
     "title": "Andrej Karpathy 从头构建大语言模型",
@@ -507,6 +573,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-11",
+    "difficulty": "进阶",
+    "difficultyReason": "代码实现Agent记忆、规划、协作和工具链，需编程与系统实践。",
     "board": "dev",
     "level": "L3",
     "title": "从零实现自己的Agent",
@@ -523,6 +591,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-12",
+    "difficulty": "基础",
+    "difficultyReason": "在Python基础上学习工具调用、规划与多智能体基本方法。",
     "board": "dev",
     "level": "L3",
     "title": "吴恩达Agentic AI",
@@ -538,6 +608,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-13",
+    "difficulty": "基础",
+    "difficultyReason": "循序学习LangChain模型调用、提示模板、RAG及Agent应用。",
     "board": "dev",
     "level": "L3",
     "title": "LangChain 2026 最新入门合集",
@@ -554,6 +626,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "tools-08",
+    "difficulty": "基础",
+    "difficultyReason": "涉及低代码智能体、API、知识库及本地和云端部署。",
     "board": "tools",
     "level": "L2",
     "title": "尚硅谷大模型技术之Coze+Dify平台智能体",
@@ -568,6 +642,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-14",
+    "difficulty": "进阶",
+    "difficultyReason": "覆盖LoRA、分布式训练、ZeRO与推理部署，需深度学习基础。",
     "board": "dev",
     "level": "L3",
     "title": "尚硅谷LLM大语言模型",
@@ -582,6 +658,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-15",
+    "difficulty": "进阶",
+    "difficultyReason": "涉及ViT、CLIP和扩散模型实现，需深度学习与视觉模型基础。",
     "board": "dev",
     "level": "L3",
     "title": "尚硅谷多模态模型",
@@ -596,6 +674,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-16",
+    "difficulty": "进阶",
+    "difficultyReason": "涉及状态图、检查点、持久化与中断恢复的智能体工程。",
     "board": "dev",
     "level": "L3",
     "title": "尚硅谷LangGraph智能体编排",
@@ -610,6 +690,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "strategy-06",
+    "difficulty": "基础",
+    "difficultyReason": "搭建触发器、API和多步工作流，需基础工具与流程认知。",
     "board": "strategy",
     "level": "L4",
     "title": "n8n 官方 Beginner Course（9 集）",
@@ -625,6 +707,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "strategy-07",
+    "difficulty": "基础",
+    "difficultyReason": "通过节点参数和模型配置搭建图像视频工作流。",
     "board": "strategy",
     "level": "L4",
     "title": "ComfyUI Tutorial Series",
@@ -639,6 +723,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "strategy-08",
+    "difficulty": "进阶",
+    "difficultyReason": "涉及多Agent依赖、结构化输出和生产级工作流工程。",
     "board": "strategy",
     "level": "L4",
     "title": "CrewAI Tutorial 合集",
@@ -652,21 +738,9 @@ export const resources: Resource[] = [
     "repositoryUrl": "https://github.com/crewAIInc/crewAI"
   },
   {
-    "id": "strategy-09",
-    "board": "strategy",
-    "level": "L4",
-    "title": "Agentic AI using LangGraph 合集",
-    "description": "代码仓：https://github.com/langchain-ai/langgraph，合集围绕状态图讲解有状态 Agent 的构建，涵盖节点与边、Command、检查点、流式输出、中断恢复、长期记忆、Human-in-the-Loop 与持久执行；适合需要开发可控、多步骤、可观测的长时运行智能体工作流的应用研发人员（需具备 Python 基础）。",
-    "platform": "YouTube",
-    "region": "overseas",
-    "media": "video",
-    "collection": true,
-    "recommended": false,
-    "url": "https://www.youtube.com/watch?v=yC36gN-rqjo",
-    "repositoryUrl": "https://github.com/langchain-ai/langgraph"
-  },
-  {
     "id": "tools-09",
+    "difficulty": "入门",
+    "difficultyReason": "按周报、纪要和表格等具体任务学习，操作门槛较低。",
     "board": "tools",
     "level": "L2",
     "title": "办公提效合集",
@@ -684,6 +758,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "dev-17",
+    "difficulty": "基础",
+    "difficultyReason": "编写和组织Skill并完成环境配置，需要基础编程能力。",
     "board": "dev",
     "level": "L3",
     "title": "手把手教你熟练使用SKILL技能！2026最新版",
@@ -701,6 +777,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-12",
+    "difficulty": "入门",
+    "difficultyReason": "用3D动画解释计算机部件分工和工程原理。",
     "board": "basics",
     "level": "L1",
     "title": "3D动画解释电脑硬件及工程系统是如何工作？",
@@ -718,6 +796,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-13",
+    "difficulty": "进阶",
+    "difficultyReason": "讨论并行策略、互连与通信库，需分布式训练基础。",
     "board": "basics",
     "level": "L1",
     "title": "【AI框架】分布式并行",
@@ -735,6 +815,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-14",
+    "difficulty": "进阶",
+    "difficultyReason": "分析训练系统和集群性能，需计算架构与模型训练基础。",
     "board": "basics",
     "level": "L1",
     "title": "【AI 集群原理】集群性能分析",
@@ -752,6 +834,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-15",
+    "difficulty": "基础",
+    "difficultyReason": "学习组网拓扑和收敛比，需基础网络与集群概念。",
     "board": "basics",
     "level": "L1",
     "title": "AI万卡集群组网的网络基本知识！多层、单层、收敛比、拓扑什么关系？",
@@ -769,6 +853,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-16",
+    "difficulty": "基础",
+    "difficultyReason": "涉及机柜、供配电与高密度负载，需基础机房工程认知。",
     "board": "basics",
     "level": "L1",
     "title": "AI机房与供电：从数据中心到高密度AI设施",
@@ -787,6 +873,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-17",
+    "difficulty": "入门",
+    "difficultyReason": "动画介绍半导体及存储层次，适合硬件概念入门。",
     "board": "basics",
     "level": "L1",
     "title": "用最好的动画为你讲解半导体世界的原理",
@@ -804,6 +892,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-18",
+    "difficulty": "入门",
+    "difficultyReason": "以科普形式建立工作站、互联和液冷的整体认识。",
     "board": "basics",
     "level": "L1",
     "title": "AI Infra知识科普，小白适用，一次听懂。",
@@ -822,6 +912,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-19",
+    "difficulty": "入门",
+    "difficultyReason": "解释CPU、GPU、NPU与软件栈的定位和区别。",
     "board": "basics",
     "level": "L1",
     "title": "AI芯片基础知识之CPU GPU NPU的区别到底是什么？",
@@ -839,6 +931,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-20",
+    "difficulty": "基础",
+    "difficultyReason": "跨层理解计算集群与AI工厂建设，需基本计算机概念。",
     "board": "basics",
     "level": "L1",
     "title": "AI工厂全景：从五层框架到系统架构",
@@ -856,6 +950,8 @@ export const resources: Resource[] = [
   },
   {
     "id": "basics-21",
+    "difficulty": "基础",
+    "difficultyReason": "进一步理解冷却路线、机柜、管路与CDU的系统关系。",
     "board": "basics",
     "level": "L1",
     "title": "AI工厂能效与液冷：电、热、水如何协同",
@@ -884,5 +980,444 @@ export const resources: Resource[] = [
       }
     ],
     "publishedAt": "2026-11-02"
+  },
+  {
+    "id": "nov09-basics-22",
+    "difficulty": "入门",
+    "difficultyReason": "以动画和类比理解芯片、内存、存储及能源，不要求工程实践。",
+    "board": "basics",
+    "level": "L1",
+    "title": "动画形式学习AI算力工厂：芯片、存储与能源原理",
+    "description": "包含：CPU工作机制、AI内存与存储层次、算力工厂产业链、AI能源需求及电网影响。\n原网播放量（表格快照，分项不相加）：CPU如何工作？The Engineering that Runs the Digital World：328.9万；计算机缓存、内存和存储如何工作？：51.6万；AI数据工厂全景：从一粒沙子到万亿算力工厂：70.5万；AI进化史：一场能源大冒险？：87.0万；Why are AI data centers using so much electricity?：64.4万；How AI is Ruining the Electric Grid：144.7万",
+    "platform": "Bilibili / YouTube",
+    "region": "both",
+    "media": "video",
+    "collection": true,
+    "recommended": false,
+    "publishedAt": "2026-11-09",
+    "url": "https://www.youtube.com/watch?v=16zrEPOsIcI",
+    "episodes": 6,
+    "videos": [
+      {
+        "title": "CPU如何工作？The Engineering that Runs the Digital World",
+        "url": "https://www.youtube.com/watch?v=16zrEPOsIcI"
+      },
+      {
+        "title": "计算机缓存、内存和存储如何工作？",
+        "url": "https://www.youtube.com/watch?v=TfhL5kBiQVI"
+      },
+      {
+        "title": "AI数据工厂全景：从一粒沙子到万亿算力工厂",
+        "url": "https://www.bilibili.com/video/BV1pzQZBYE3D/"
+      },
+      {
+        "title": "AI进化史：一场能源大冒险？",
+        "url": "https://www.bilibili.com/video/BV1ZeoUBkENp/"
+      },
+      {
+        "title": "Why are AI data centers using so much electricity?",
+        "url": "https://www.youtube.com/watch?v=z3Y-gsBKChc"
+      },
+      {
+        "title": "How AI is Ruining the Electric Grid",
+        "url": "https://www.youtube.com/watch?v=3__HO-akNC8"
+      }
+    ],
+    "note": "视频数量按独立来源链接计；原站多P未展开。"
+  },
+  {
+    "id": "nov09-dev-18",
+    "difficulty": "进阶",
+    "difficultyReason": "涉及GPU互联、万卡集群部署和全栈工程，需要系统基础。",
+    "board": "dev",
+    "level": "L3",
+    "title": "【算·网】GPU与万卡集群：从NVIDIA架构到工程部署",
+    "description": "包含：NVIDIA参考架构、COMPUTEX技术发布、Blackwell与GB200互联、万卡建设和AI工厂全栈工程。\n原网播放量（表格快照，分项不相加）：AI Factory Insider：AI基础设施全栈与参考架构：1.1万；NVIDIA CEO 黄仁勋主题演讲 | COMPUTEX 2025：37.6万；【AI集群原理】万卡AI集群：7064；Inside an AI Factory – Power, Cooling, and GPUs Explained：19.2万",
+    "platform": "Bilibili / YouTube",
+    "region": "both",
+    "media": "video",
+    "collection": true,
+    "recommended": false,
+    "publishedAt": "2026-11-09",
+    "url": "https://www.youtube.com/watch?v=Pkh0dqLCsrs",
+    "episodes": 4,
+    "videos": [
+      {
+        "title": "AI Factory Insider：AI基础设施全栈与参考架构",
+        "url": "https://www.youtube.com/watch?v=Pkh0dqLCsrs"
+      },
+      {
+        "title": "NVIDIA CEO 黄仁勋主题演讲 | COMPUTEX 2025",
+        "url": "https://www.bilibili.com/video/BV1XSEXzeE2D"
+      },
+      {
+        "title": "【AI集群原理】万卡AI集群",
+        "url": "https://www.bilibili.com/video/BV16MqsYNExP/"
+      },
+      {
+        "title": "Inside an AI Factory – Power, Cooling, and GPUs Explained",
+        "url": "https://www.youtube.com/watch?v=QKNsHZatiWU"
+      }
+    ],
+    "note": "视频数量按独立来源链接计；原站多P未展开。"
+  },
+  {
+    "id": "nov09-basics-23",
+    "difficulty": "入门",
+    "difficultyReason": "能源需求与电网影响科普，不涉及供配电工程设计。",
+    "board": "basics",
+    "level": "L1",
+    "title": "【电】AI用电量与电网升级：从需求到供给",
+    "description": "包含：IEA关于AI用电的解释、电网为AI需求升级的纪录片、数据中心与家庭电费讨论。\n原网播放量（表格快照，分项不相加）：How much electricity does AI actually use?：5.3万；How the Electrical Grid Is Being Rebuilt for AI：146.5万；How AI is Destroying Your Electric Bill：14.2万",
+    "platform": "YouTube",
+    "region": "overseas",
+    "media": "video",
+    "collection": true,
+    "recommended": false,
+    "publishedAt": "2026-11-09",
+    "url": "https://www.youtube.com/watch?v=cz3AYYZBiGs",
+    "episodes": 3,
+    "videos": [
+      {
+        "title": "How much electricity does AI actually use?",
+        "url": "https://www.youtube.com/watch?v=cz3AYYZBiGs"
+      },
+      {
+        "title": "How the Electrical Grid Is Being Rebuilt for AI",
+        "url": "https://www.youtube.com/watch?v=8KOYyfZbPzo"
+      },
+      {
+        "title": "How AI is Destroying Your Electric Bill",
+        "url": "https://www.youtube.com/watch?v=n8m1BCzvGCA"
+      }
+    ],
+    "note": "视频数量按独立来源链接计；原站多P未展开。"
+  },
+  {
+    "id": "nov09-basics-24",
+    "difficulty": "入门",
+    "difficultyReason": "通过行业访谈理解功耗瓶颈和算力服务的基本概念。",
+    "board": "basics",
+    "level": "L1",
+    "title": "【电】电力瓶颈与算力服务：算力如何像电一样使用",
+    "description": "包含：AI芯片的电力瓶颈、央视对高文的算力服务化访谈。\n原网播放量（表格快照，分项不相加）：不止算力与存储：电力是AI芯片的下一个瓶颈？：18.5万；中国工程院院士高文：让用户像用电一样使用算力：16.8万",
+    "platform": "Bilibili",
+    "region": "cn",
+    "media": "video",
+    "collection": true,
+    "recommended": false,
+    "publishedAt": "2026-11-09",
+    "url": "https://www.bilibili.com/video/BV1ps3v6AEpF",
+    "episodes": 2,
+    "videos": [
+      {
+        "title": "不止算力与存储：电力是AI芯片的下一个瓶颈？",
+        "url": "https://www.bilibili.com/video/BV1ps3v6AEpF"
+      },
+      {
+        "title": "中国工程院院士高文：让用户像用电一样使用算力",
+        "url": "https://www.bilibili.com/video/BV1VRQeYREv5"
+      }
+    ],
+    "note": "视频数量按独立来源链接计；原站多P未展开。"
+  },
+  {
+    "id": "nov09-dev-19",
+    "difficulty": "基础",
+    "difficultyReason": "串联机房、超算、机柜和液冷的系统结构与协作关系。",
+    "board": "dev",
+    "level": "L2",
+    "title": "【基】走进AI数据中心：机房、机柜与液冷系统",
+    "description": "包含：数据中心运作、液冷超算探访、AI数据中心系统拆解及新闻机构现场介绍。\n原网播放量（表格快照，分项不相加）：How Data Centers Actually Work：161.7万；液冷超级计算机如何工作？：106.6万；The Entire AI Data Center Explained：61.4万；How data centers work and why AI is driving their growth：33.3万",
+    "platform": "YouTube",
+    "region": "overseas",
+    "media": "video",
+    "collection": true,
+    "recommended": false,
+    "publishedAt": "2026-11-09",
+    "url": "https://www.youtube.com/watch?v=cTwvUqLNQrM",
+    "episodes": 4,
+    "videos": [
+      {
+        "title": "How Data Centers Actually Work",
+        "url": "https://www.youtube.com/watch?v=cTwvUqLNQrM"
+      },
+      {
+        "title": "液冷超级计算机如何工作？",
+        "url": "https://www.youtube.com/watch?v=U4Sqh-uJ2NA"
+      },
+      {
+        "title": "The Entire AI Data Center Explained",
+        "url": "https://www.youtube.com/watch?v=ckoi0RTEgcY"
+      },
+      {
+        "title": "How data centers work and why AI is driving their growth",
+        "url": "https://www.youtube.com/watch?v=3Yh9OddmgS0"
+      }
+    ],
+    "note": "视频数量按独立来源链接计；原站多P未展开。"
+  },
+  {
+    "id": "nov09-strategy-10",
+    "difficulty": "基础",
+    "difficultyReason": "对照五层框架、产业访谈与分析，需基础AI产业认知。",
+    "board": "strategy",
+    "level": "L2",
+    "title": "【全景】NVIDIA五层框架与全球算力产业",
+    "description": "包含：WEF五层框架对话、Sequoia与CSIS访谈、中文算力产业分析。\n原网播放量（表格快照，分项不相加）：Conversation with Jensen Huang, President and CEO of NVIDIA | WEF Annual Meeting 2026（达沃斯 2026：黄仁勋五层 AI 蛋糕）：17.7万；NVIDIA's Jensen Huang on Building the Dynamo of the Intelligence Economy：42.9万；NVIDIA's Jensen Huang on Securing American Leadership on AI：33.1万；英伟达、GPU、中国：算力真能打赢AI战争吗？：114.6万",
+    "platform": "Bilibili / YouTube",
+    "region": "both",
+    "media": "video",
+    "collection": true,
+    "recommended": false,
+    "publishedAt": "2026-11-09",
+    "url": "https://www.youtube.com/watch?v=hoDYYCyxMuE",
+    "episodes": 4,
+    "videos": [
+      {
+        "title": "Conversation with Jensen Huang, President and CEO of NVIDIA | WEF Annual Meeting 2026（达沃斯 2026：黄仁勋五层 AI 蛋糕）",
+        "url": "https://www.youtube.com/watch?v=hoDYYCyxMuE"
+      },
+      {
+        "title": "NVIDIA's Jensen Huang on Building the Dynamo of the Intelligence Economy",
+        "url": "https://www.youtube.com/watch?v=2UpQbeAZuqA"
+      },
+      {
+        "title": "NVIDIA's Jensen Huang on Securing American Leadership on AI",
+        "url": "https://www.youtube.com/watch?v=jpZ0dPsnIWw"
+      },
+      {
+        "title": "英伟达、GPU、中国：算力真能打赢AI战争吗？",
+        "url": "https://www.bilibili.com/video/BV1qZiQBwESG/"
+      }
+    ],
+    "note": "视频数量按独立来源链接计；原站多P未展开。"
+  },
+  {
+    "id": "nov09-basics-25",
+    "difficulty": "基础",
+    "difficultyReason": "分析智算云成本、建设约束和商业模式，需基础产业认知。",
+    "board": "basics",
+    "level": "L2",
+    "title": "【云】智算云与数据中心商业：从建厂到卖算力",
+    "description": "包含：智算云产业介绍、数据中心商业模式、AI数据中心建设约束和经济分析。\n原网播放量（表格快照，分项不相加）：超级AI云：被重塑的计算文明：2.6万；What They're Not Telling You About Data Centers：239.9万；Why Building AI Data Centres Isn't Working Anymore：160.5万；Almost No One Realizes This About AI Data Centers：57.6万",
+    "platform": "Bilibili / YouTube",
+    "region": "both",
+    "media": "video",
+    "collection": true,
+    "recommended": false,
+    "publishedAt": "2026-11-09",
+    "url": "https://www.bilibili.com/video/BV1iMJQzqEAe",
+    "episodes": 4,
+    "videos": [
+      {
+        "title": "超级AI云：被重塑的计算文明",
+        "url": "https://www.bilibili.com/video/BV1iMJQzqEAe"
+      },
+      {
+        "title": "What They're Not Telling You About Data Centers",
+        "url": "https://www.youtube.com/watch?v=1V_o8tfuGdw"
+      },
+      {
+        "title": "Why Building AI Data Centres Isn't Working Anymore",
+        "url": "https://www.youtube.com/watch?v=eXXwN_TDdLU"
+      },
+      {
+        "title": "Almost No One Realizes This About AI Data Centers",
+        "url": "https://www.youtube.com/watch?v=iI3tT6CCVH8"
+      }
+    ],
+    "note": "视频数量按独立来源链接计；原站多P未展开。"
+  },
+  {
+    "id": "nov09-tools-10",
+    "difficulty": "基础",
+    "difficultyReason": "从调研到Excel、Word和PPT交付，涵盖连接器与Skill复用。",
+    "board": "tools",
+    "level": "L1",
+    "title": "WorkBuddy办公自动化：从资料调研到报告与PPT",
+    "description": "包含：工作空间、联网搜索、连接器、采购调研、Excel选品表、Word报告、PPT、HTML与Skill复用。\n原网播放量（表格快照，分项不相加）：25分钟全面掌握WorkBuddy：5.0万",
+    "platform": "Bilibili",
+    "region": "cn",
+    "media": "video",
+    "collection": true,
+    "recommended": false,
+    "publishedAt": "2026-11-09",
+    "url": "https://www.bilibili.com/video/BV1v4GA6vEHy/",
+    "episodes": 1,
+    "videos": [
+      {
+        "title": "25分钟全面掌握WorkBuddy",
+        "url": "https://www.bilibili.com/video/BV1v4GA6vEHy/"
+      }
+    ],
+    "note": "视频数量按独立来源链接计；原站多P未展开。",
+    "views": 50000
+  },
+  {
+    "id": "nov09-tools-11",
+    "difficulty": "入门",
+    "difficultyReason": "以提示、纪要、PPT和图表等常见办公任务为学习入口。",
+    "board": "tools",
+    "level": "L1",
+    "title": "DeepSeek办公实战：PPT、纪要、图表与文档",
+    "description": "包含：提问技巧、文件分析、PPT大纲与模板、Excel、会议纪要、流程图和图文内容。\n原网播放量（表格快照，分项不相加）：DeepSeek从入门到提高：24＋12节课：2.1万",
+    "platform": "Bilibili",
+    "region": "cn",
+    "media": "video",
+    "collection": true,
+    "recommended": false,
+    "publishedAt": "2026-11-09",
+    "url": "https://www.bilibili.com/video/BV1NxPHegE82/",
+    "episodes": 1,
+    "videos": [
+      {
+        "title": "DeepSeek从入门到提高：24＋12节课",
+        "url": "https://www.bilibili.com/video/BV1NxPHegE82/"
+      }
+    ],
+    "note": "视频数量按独立来源链接计；原站多P未展开。",
+    "views": 21000
+  },
+  {
+    "id": "nov09-tools-12",
+    "difficulty": "基础",
+    "difficultyReason": "涉及研究模式、连接器和任务自动化等多功能协同使用。",
+    "board": "tools",
+    "level": "L1",
+    "title": "ChatGPT办公与图像创作：研究报告、海报和封面",
+    "description": "包含：Deep Research、Agent Mode、连接器、任务自动化，以及海报、封面和截图生成实测。\n原网播放量（表格快照，分项不相加）：ChatGPT隐藏功能与Deep Research办公实践：3.8万；OpenAI Image 2.0首测：封面、海报、截图全都能做了：5.0万",
+    "platform": "Bilibili / YouTube",
+    "region": "both",
+    "media": "video",
+    "collection": true,
+    "recommended": false,
+    "publishedAt": "2026-11-09",
+    "url": "https://www.youtube.com/watch?v=1saDEU_wZ0Y",
+    "episodes": 2,
+    "videos": [
+      {
+        "title": "ChatGPT隐藏功能与Deep Research办公实践",
+        "url": "https://www.youtube.com/watch?v=1saDEU_wZ0Y"
+      },
+      {
+        "title": "OpenAI Image 2.0首测：封面、海报、截图全都能做了",
+        "url": "https://www.bilibili.com/video/BV1CAdXB4EXW/"
+      }
+    ],
+    "note": "视频数量按独立来源链接计；原站多P未展开。"
+  },
+  {
+    "id": "nov09-tools-13",
+    "difficulty": "基础",
+    "difficultyReason": "跨工具完成提示词、图像生成到视频制作完整流程。",
+    "board": "tools",
+    "level": "L1",
+    "title": "豆包×即梦：海报、封面素材与AI视频制作",
+    "description": "包含：DeepSeek辅助提示词、豆包与即梦海报、Seedance／即梦视频流程，以及豆包学习方法。\n原网播放量（表格快照，分项不相加）：AIGC海报合集：DeepSeek、豆包与即梦实战：4.0万；Seedance2.0 / 即梦AI5.0 全流程教程（22集）：60.5万；如何用豆包学会任何领域？：41.5万",
+    "platform": "Bilibili",
+    "region": "cn",
+    "media": "video",
+    "collection": true,
+    "recommended": false,
+    "publishedAt": "2026-11-09",
+    "url": "https://www.bilibili.com/video/BV1MNADeWEgm/",
+    "episodes": 3,
+    "videos": [
+      {
+        "title": "AIGC海报合集：DeepSeek、豆包与即梦实战",
+        "url": "https://www.bilibili.com/video/BV1MNADeWEgm/"
+      },
+      {
+        "title": "Seedance2.0 / 即梦AI5.0 全流程教程（22集）",
+        "url": "https://www.bilibili.com/video/BV1KjV46WETN/"
+      },
+      {
+        "title": "如何用豆包学会任何领域？",
+        "url": "https://www.bilibili.com/video/BV1MaosBoE36/"
+      }
+    ],
+    "note": "视频数量按独立来源链接计；原站多P未展开。"
+  },
+  {
+    "id": "nov09-tools-14",
+    "difficulty": "入门",
+    "difficultyReason": "从导入资料、理解内容到生成汇报草稿，操作门槛较低。",
+    "board": "tools",
+    "level": "L1",
+    "title": "NotebookLM洞察与汇报：从资料理解到演示文稿",
+    "description": "包含：NotebookLM核心功能、资料组织和理解、演示文稿生成与后续处理。\n原网播放量（表格快照，分项不相加）：Learn 80% of NotebookLM in Under 13 Minutes：183.1万；How to Make STUNNING Slide Decks With NotebookLM：29.9万",
+    "platform": "YouTube",
+    "region": "overseas",
+    "media": "video",
+    "collection": true,
+    "recommended": false,
+    "publishedAt": "2026-11-09",
+    "url": "https://www.youtube.com/watch?v=EOmgC3-hznM",
+    "episodes": 2,
+    "videos": [
+      {
+        "title": "Learn 80% of NotebookLM in Under 13 Minutes",
+        "url": "https://www.youtube.com/watch?v=EOmgC3-hznM"
+      },
+      {
+        "title": "How to Make STUNNING Slide Decks With NotebookLM",
+        "url": "https://www.youtube.com/watch?v=GJkZcOFHEYo"
+      }
+    ],
+    "note": "视频数量按独立来源链接计；原站多P未展开。"
+  },
+  {
+    "id": "nov09-tools-15",
+    "difficulty": "入门",
+    "difficultyReason": "介绍账号设置、日程、邮件和周期任务等日常操作。",
+    "board": "tools",
+    "level": "L1",
+    "title": "Muse个人助理：入门设置与日常工作生活任务",
+    "description": "包含：账号设置、餐厅调研、邮件、日历、定时任务、偏好和PDF使用。\n原网播放量（表格快照，分项不相加）：Meta Muse个人助理入门与日常任务实践：9.5万",
+    "platform": "YouTube",
+    "region": "overseas",
+    "media": "video",
+    "collection": true,
+    "recommended": false,
+    "publishedAt": "2026-11-09",
+    "url": "https://www.youtube.com/watch?v=xBSLmwVTsRc",
+    "episodes": 1,
+    "videos": [
+      {
+        "title": "Meta Muse个人助理入门与日常任务实践",
+        "url": "https://www.youtube.com/watch?v=xBSLmwVTsRc"
+      }
+    ],
+    "note": "视频数量按独立来源链接计；原站多P未展开。",
+    "views": 95000
+  },
+  {
+    "id": "nov09-tools-16",
+    "difficulty": "基础",
+    "difficultyReason": "将多个助手角色、工具连接和周期任务组织为工作流。",
+    "board": "tools",
+    "level": "L1",
+    "title": "Grok Bot个人Agent：先懂概念，再搭工作生活助手",
+    "description": "包含：Bot、工具连接、周期任务等概念，以及实际工作、家庭与个人助理案例。\n原网播放量（表格快照，分项不相加）：Every Grok Bot Concept Explained for Normal People：57.8万；7 Grok Bot agents I use every day：335.6万",
+    "platform": "YouTube",
+    "region": "overseas",
+    "media": "video",
+    "collection": true,
+    "recommended": false,
+    "publishedAt": "2026-11-09",
+    "url": "https://www.youtube.com/watch?v=NyfYxpXiw_0",
+    "episodes": 2,
+    "videos": [
+      {
+        "title": "Every Grok Bot Concept Explained for Normal People",
+        "url": "https://www.youtube.com/watch?v=NyfYxpXiw_0"
+      },
+      {
+        "title": "7 Grok Bot agents I use every day",
+        "url": "https://www.youtube.com/watch?v=QBmgF1kJSK4"
+      }
+    ],
+    "note": "视频数量按独立来源链接计；原站多P未展开。"
   }
 ]

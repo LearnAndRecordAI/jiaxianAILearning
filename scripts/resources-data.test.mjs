@@ -7,9 +7,10 @@ function readResources() {
   return JSON.parse(text.slice(text.indexOf('= [') + 2, text.lastIndexOf(']') + 1))
 }
 
-test('preserves the 44 reviewed resources and appends 12 resources into four categories', () => {
+test('keeps the authorized 55 workbook resources and 14 November collections', () => {
   const resources = readResources()
-  assert.equal(resources.length, 56)
+  assert.equal(resources.length, 69)
+  assert.ok(!resources.some(r => r.id === 'strategy-09'))
   assert.deepEqual(
     [...new Set(resources.map((item) => item.board))].sort(),
     ['basics', 'dev', 'strategy', 'tools'],
@@ -21,7 +22,7 @@ test('preserves the 44 reviewed resources and appends 12 resources into four cat
         resources.filter((item) => item.board === board).length,
       ]),
     ),
-    { basics: 21, tools: 9, dev: 17, strategy: 9 },
+    { basics: 25, tools: 16, dev: 19, strategy: 9 },
   )
 })
 
@@ -41,8 +42,24 @@ test('keeps one canonical link per resource and gives every YouTube collection a
   assert.equal(new Set(urls).size, urls.length)
 
   const youtube = resources.filter((item) => item.platform === 'YouTube')
-  assert.equal(youtube.length, 4)
+  assert.equal(youtube.length, 8)
   assert.ok(youtube.every((item) => /^https:\/\/(www\.)?youtube\.com\//.test(item.url)))
+})
+
+test('November import stops at Grok, keeps 39 source links, and is discoverable in both topics', () => {
+  const resources = readResources()
+  const added = resources.filter(r => r.publishedAt === '2026-11-09')
+  assert.equal(added.length, 14)
+  assert.ok(added.at(-1).title.startsWith('Grok Bot'))
+  assert.equal(added.flatMap(r => r.videos).length, 39)
+  assert.equal(new Set(added.flatMap(r => r.videos.map(v => v.url))).size, 39)
+  assert.ok(added.every(r => r.episodes === r.videos.length))
+  assert.ok(added.every(r => !r.recommendationReason && r.videos.every(v => v.title && v.url)))
+  assert.ok(added.every(r => !/Qwen3|Claude Code|OpenClaw/.test(r.title)))
+  const topics = JSON.parse(readFileSync(new URL('../src/data/topics.json', import.meta.url), 'utf8'))
+  assert.ok(added.slice(0, 7).filter(r => r.id !== 'nov09-strategy-10').every(r => topics[0].resourceIds.includes(r.id)))
+  assert.ok(resources.some(r => r.id === 'nov09-strategy-10'), 'cross-layer overview remains available in the main catalogue')
+  assert.ok(added.slice(7).every(r => topics[1].resourceIds.includes(r.id)))
 })
 
 test('preserves collection metadata used by cards', () => {

@@ -3,19 +3,116 @@
     "id": "ai-dc",
     "label": "AI算力工厂",
     "description": "应用、模型、基础设施、芯片、能源",
-    "resourceIds": ["tools-09", "tools-06", "dev-11", "basics-03", "dev-10", "dev-14", "basics-12", "basics-13", "basics-14", "basics-15", "basics-16", "basics-17", "basics-18", "basics-19", "basics-20", "basics-21"],
+    "resourceIds": [
+      "tools-08",
+      "dev-11",
+      "dev-12",
+      "dev-13",
+      "dev-06",
+      "dev-09",
+      "basics-03",
+      "basics-04",
+      "dev-10",
+      "basics-07",
+      "dev-04",
+      "basics-18",
+      "basics-16",
+      "nov09-dev-19",
+      "basics-15",
+      "basics-13",
+      "basics-14",
+      "basics-21",
+      "basics-20",
+      "nov09-dev-18",
+      "nov09-basics-25",
+      "basics-19",
+      "basics-17",
+      "basics-12",
+      "nov09-basics-22",
+      "nov09-basics-23",
+      "nov09-basics-24"
+    ],
     "sections": [
-      { "label": "应用层", "title": "APPLICATIONS", "resourceIds": ["tools-09", "tools-06", "dev-11"] },
-      { "label": "模型层", "title": "MODELS", "resourceIds": ["basics-03", "dev-10", "dev-14"] },
-      { "label": "基础设施层", "title": "INFRASTRUCTURE", "resourceIds": ["basics-15", "basics-13", "basics-14", "basics-18", "basics-20"] },
-      { "label": "芯片层", "title": "CHIPS", "resourceIds": ["basics-19", "basics-17", "basics-12"] },
-      { "label": "能源层", "title": "ENERGY", "resourceIds": ["basics-16", "basics-21"] }
+      {
+        "label": "应用层",
+        "title": "APPLICATIONS",
+        "resourceIds": [
+          "tools-08",
+          "dev-11",
+          "dev-12",
+          "dev-13",
+          "dev-06",
+          "dev-09"
+        ]
+      },
+      {
+        "label": "模型层",
+        "title": "MODELS",
+        "resourceIds": [
+          "basics-03",
+          "basics-04",
+          "dev-10",
+          "basics-07",
+          "dev-04"
+        ]
+      },
+      {
+        "label": "基础设施层",
+        "title": "INFRASTRUCTURE",
+        "resourceIds": [
+          "basics-18",
+          "nov09-dev-19",
+          "basics-15",
+          "basics-13",
+          "basics-14",
+          "basics-20",
+          "nov09-dev-18",
+          "nov09-basics-25"
+        ]
+      },
+      {
+        "label": "芯片层",
+        "title": "CHIPS",
+        "resourceIds": [
+          "basics-19",
+          "basics-17",
+          "basics-12",
+          "nov09-basics-22"
+        ]
+      },
+      {
+        "label": "能源层",
+        "title": "ENERGY",
+        "resourceIds": [
+          "basics-16",
+          "basics-21",
+          "nov09-basics-23",
+          "nov09-basics-24"
+        ]
+      }
     ]
   },
   {
     "id": "office",
     "label": "AI办公提效",
     "description": "让AI帮上忙",
-    "resourceIds": ["tools-01", "tools-02", "tools-03", "tools-04", "tools-05", "tools-06", "tools-07", "tools-08", "tools-09"]
+    "resourceIds": [
+      "tools-01",
+      "tools-02",
+      "tools-03",
+      "tools-04",
+      "tools-05",
+      "tools-06",
+      "tools-07",
+      "tools-08",
+      "tools-09",
+      "nov09-tools-10",
+      "nov09-tools-11",
+      "nov09-tools-12",
+      "nov09-tools-13",
+      "nov09-tools-14",
+      "nov09-tools-15",
+      "nov09-tools-16"
+    ]
   }
 ]
