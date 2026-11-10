@@ -49,7 +49,7 @@ function toggleTopic(id: string) {
     </div>
     </div>
     <div class="topics" aria-label="热门专题">
-      <button v-for="topic in topics" :key="topic.id" class="topic" :class="{ selected: home.topic === topic.id }"
+      <button v-for="topic in topics.filter(t=>t.id==='ai-dc')" :key="topic.id" class="topic" :class="{ selected: home.topic === topic.id }"
         :title="`${topic.description} · ${topic.resourceIds.length}个合集`"
         :aria-pressed="home.topic === topic.id" @click="toggleTopic(topic.id)">
         <span class="topic-name"><span v-if="topic.id === 'ai-dc'" aria-hidden="true">🔥 </span>{{ topic.label }}</span>
@@ -65,7 +65,7 @@ function toggleTopic(id: string) {
 
 <style scoped>
 .my-learning{flex:none;white-space:nowrap;border:1px solid var(--accent-line);background:var(--surface-2);color:var(--accent-ink);border-radius:20px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer}
-.menu-strip { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: thin; padding: 3px 0; }
+.menu-strip { display: flex; align-items: center; gap: 8px; flex: 0 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: thin; padding: 3px 0; }
 .topics { display:flex;align-items:center;gap:8px;flex:none;border-left:1px solid var(--border);padding-left:12px }
 .topic { flex: none; white-space: nowrap; border: 1px solid var(--accent-line); border-radius: 16px; padding: 5px 12px; background: var(--surface-2); color: var(--accent-ink); cursor: pointer; }
 .topic:hover, .topic.selected { border-color: var(--accent); background: var(--surface-3); }
@@ -127,7 +127,9 @@ function toggleTopic(id: string) {
   font-weight: 700;
 }
 .search {
-  flex: 0 1 150px;
+  flex: 1 1 230px;
+  max-width: 340px;
+  margin-left: auto;
   min-width: 92px;
   display: flex;
   align-items: center;
@@ -136,7 +138,7 @@ function toggleTopic(id: string) {
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 7px 14px;
-  width: 150px;
+  width: 230px;
 }
 .search .mag {
   width: 13px;
@@ -169,7 +171,7 @@ function toggleTopic(id: string) {
   .toolbar{flex-wrap:wrap}
   .menu-strip{flex-basis:100%}
   .topics{border-left:0;padding-left:0}
-  .search{flex:1;min-width:80px;width:100px}
+  .search{flex:1;min-width:80px;width:100px;max-width:none}
   .topic{padding:5px 9px}
   .my-learning{padding:7px 10px}
 }
