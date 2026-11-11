@@ -1,6 +1,37 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import {existsSync} from 'node:fs'
+test('personal summary masks ranks outside top100 and point ranks outside eligible top20',async()=>{
+ const {personalStanding}=await import('../src/utils/ranking.mjs')
+ assert.equal(typeof personalStanding,'function')
+ const rows=Array.from({length:120},(_,i)=>({id:'u'+i,seconds:200-i,points:i}))
+ const out=personalStanding(rows,'u110')
+ assert.equal(out.timeRank,null)
+ assert.equal(out.gap,11)
+ assert.equal(out.pointRank,null)
+ assert.equal(personalStanding(rows,'u99').pointRank,1)
+ assert.equal(personalStanding(rows,'u0').pointRank,null)
+ assert.equal(personalStanding(rows,'missing').gap,null)
+})
+test('monthly awards select exactly 100 by time before ranking their task points',async()=>{
+ const {monthlyAwards}=await import('../src/utils/ranking.mjs')
+ assert.equal(typeof monthlyAwards,'function')
+ const rows=Array.from({length:101},(_,i)=>({id:String(i).padStart(3,'0'),seconds:200-i,points:i===100?99999:i*10}))
+ const awards=monthlyAwards(rows)
+ assert.equal(awards.length,100)
+ assert.ok(!awards.some(r=>r.id==='100'))
+ assert.equal(awards.find(r=>r.id==='099').rewardRank,1)
+ assert.equal(awards.filter(r=>r.rewardRank<=10).length,10)
+ assert.equal(awards.filter(r=>r.rewardRank>10&&r.rewardRank<=20).length,10)
+})
+test('minute display preserves sub-minute visibility and never changes the ranking precision',async()=>{
+ const {minuteLabel,monthlyAwards}=await import('../src/utils/ranking.mjs')
+ assert.equal(typeof minuteLabel,'function')
+ assert.equal(minuteLabel(0),'0分钟')
+ assert.equal(minuteLabel(30),'0.5分钟')
+ assert.equal(minuteLabel(3600),'60分钟')
+ assert.equal(monthlyAwards([{id:'b',seconds:60,points:100},{id:'a',seconds:61,points:100}])[0].id,'a')
+})
 test('ranks positive learning times, gives ties the same rank and excludes zero-time users',async()=>{
  const path=new URL('../src/utils/ranking.mjs',import.meta.url)
  assert.ok(existsSync(path),'ranking helper exists')

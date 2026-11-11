@@ -11,7 +11,7 @@ import LearningStudio from '../components/LearningStudio.vue'
 import CommunityPoints from '../components/CommunityPoints.vue'
 import DifficultyTag from '../components/DifficultyTag.vue'
 import {useGrowth} from '../composables/useGrowth'
-import {TASK_REWARDS} from '../utils/growth.mjs'
+import {TASK_REWARDS,studyMilestones,hasSavedShare,hasDailyClaim,dailyTaskKey} from '../utils/growth.mjs'
 import {CHECKIN_REWARDS,checkinPoints} from '../utils/learning.mjs'
 const emit=defineEmits<{(e:'back'):void}>()
 const {state,today,month,count,consecutive,totalSeconds,checkin,redeem,refresh,open}=useLearning()
@@ -20,6 +20,9 @@ const {setActive,home}=useResources()
 const {growth,points,claim}=useGrowth()
 const studio=ref(false)
 const tab=ref('签到与奖励'),recordTab=ref('最近学习'),offset=ref(0),toast=ref(''),submission=ref(''),content=ref('')
+const draftDay=ref('')
+const claimed=(id:string)=>hasDailyClaim(growth,id,today.value)
+const submitted=(id:string)=>state.submissions[dailyTaskKey(id,today.value)]
 let timer=0
 onMounted(()=>{refresh();timer=window.setInterval(refresh,30000)})
 onUnmounted(()=>clearInterval(timer))
@@ -30,23 +33,20 @@ const calendar=computed(()=>{
   return Array.from({length:Math.ceil((leading+length)/7)*7},(_,i)=>{const n=i-leading+1;return n>0&&n<=length?{day:n,key:`${displayMonth.value}-${String(n).padStart(2,'0')}`}:null})
 })
 const started=computed(()=>resources.filter(r=>(state.courses[r.id]||0)>=3))
-const boards=computed(()=>new Set(started.value.map(r=>r.board)))
-const hotLearned=computed(()=>started.value.some(r=>topics.some(t=>t.resourceIds.includes(r.id))))
+const hotLearned=computed(()=>resources.some(r=>(state.dailyCourses[today.value]?.[r.id]||0)>=3&&topics.find(t=>t.id==='ai-dc')?.resourceIds.includes(r.id)))
+const savedShared=computed(()=>hasSavedShare(bookmarks,growth.sharedByDay[today.value]||[]))
 const weekSeconds=computed(()=>{const d=new Date(today.value+'T00:00:00Z');d.setUTCDate(d.getUTCDate()-(d.getUTCDay()+6)%7);return Object.entries(state.seconds).filter(([day])=>day>=d.toISOString().slice(0,10)&&day<=today.value).reduce((a,[,n])=>a+n,0)})
 const tasks=computed(()=>[
-  {id:'boards',name:'探索四个板块',desc:'在基础、应用、开发、前沿各体验一个合集满3秒。',progress:`${boards.value.size}/4 个板块`,done:boards.value.size>=4,action:'去探索'},
-  {id:'minutes3',name:'学习初体验',desc:'先学3分钟，迈出今天的第一步。',progress:`${Math.min(3,Math.floor(totalSeconds.value/60))}/3 分钟`,done:totalSeconds.value>=180,action:'去学习'},
-  {id:'minutes10',name:'持续充电',desc:'累计学习10分钟，一点点积累新知识。',progress:`${Math.min(10,Math.floor(totalSeconds.value/60))}/10 分钟`,done:totalSeconds.value>=600,action:'去学习'},
-  {id:'hot',name:'追一追热门技术',desc:'体验AI算力工厂或AI办公提效专题中的任意合集满3秒。',progress:hotLearned.value?'1/1 个专题':'0/1 个专题',done:hotLearned.value,action:'看热门'},
-  {id:'comment',name:'分享一句学习收获',desc:'围绕一个合集发表有内容的学习评论。',progress:'正式版关联社区评论',done:false,action:'写评论'},
-  {id:'feedback',name:'一起建设学习频道',desc:'在体验汇总帖分享使用体验或改进建议。',progress:'正式版关联体验汇总帖',done:false,action:'提建议'},
-  {id:'post',name:'发布第一篇学习帖',desc:'分享一个知识点、踩坑经历或应用方法。',progress:'正式版关联社区发帖',done:false,action:'写学习帖'},
-  {id:'practice',name:'晒出你的跟练成果',desc:'记录目标、步骤与结果，让同事也能跟着做。',progress:'正式版审核成果',done:false,action:'发跟练帖'},
+  {id:'saveShare',name:'收藏并分享一个合集',desc:'收藏一个喜欢的合集，并在今天分享给同事。',progress:savedShared.value?'今日已收藏并分享同一合集':'今日收藏 + 分享同一个合集',done:savedShared.value,action:'去挑选'},
+  ...studyMilestones(state.seconds[today.value]||0).map(t=>({...t,name:`今日学习${t.minutes}分钟`,desc:'累计今天的有效学习时长，每档每天限领一次。',action:'去学习'})),
+  {id:'hot',name:'体验热门技术 · AI算力工厂',desc:'打开专题里的任意合集，站内模拟播放满3秒。',progress:hotLearned.value?'已体验':'0/1 个专题',done:hotLearned.value,action:'去体验'},
+  {id:'feedback',name:'说说你想学什么',desc:'在活动汇总帖提交想学的合集、资源链接或频道改进建议。',progress:'活动帖链接待配置 · 审核后发奖',done:false,action:'提建议'},
+  {id:'practice',name:'发布学习跟练帖',desc:'带 #稼先学ai 分享跟练步骤、作品与学习收获。',progress:'有效跟练内容审核后发奖',done:false,action:'发跟练帖'},
 ].map(task=>({...task,points:TASK_REWARDS[task.id]||0})))
 const list=computed(()=>recordTab.value==='学过的合集'?resources.filter(r=>completed.has(r.id)):recordTab.value==='我的收藏'?resources.filter(r=>bookmarks.has(r.id)):started.value)
 function explore(hot=false){setActive('recommend');home.query='';if(hot)home.topic='ai-dc';emit('back')}
-function action(id:string){if(tasks.value.find(t=>t.id===id)?.done){const n=claim(id,tasks.value.filter(t=>t.done).map(t=>t.id));if(n)toast.value=`演示领取成功：${n}积分，未计入真实社区账户。`;return}if(['comment','feedback','post','practice'].includes(id)){submission.value=id;content.value=state.submissions[id]||''}else explore(id==='hot')}
-function submit(){if(content.value.trim().length<10)return;state.submissions[submission.value]=content.value.trim();submission.value='';toast.value='演示提交成功，待审核。未发布到真实社区。'}
+function action(id:string){refresh();if(tasks.value.find(t=>t.id===id)?.done){const n=claim(id,tasks.value.filter(t=>t.done).map(t=>t.id));if(n)toast.value=`演示领取成功：${n}积分，未计入真实社区账户。`;return}if(['comment','feedback','post','practice'].includes(id)){submission.value=id;draftDay.value=today.value;content.value=submitted(id)||''}else explore(id==='hot')}
+function submit(){refresh();if(draftDay.value!==today.value){toast.value='任务已跨日刷新，请重新打开今日任务后提交。';submission.value='';return}if(content.value.trim().length<10)return;if(submission.value==='practice'&&!content.value.includes('#稼先学ai')){toast.value='跟练帖请添加 #稼先学ai 标签。';return}state.submissions[dailyTaskKey(submission.value,today.value)]=content.value.trim();submission.value='';toast.value='演示提交成功，待审核。未发布到真实社区。'}
 const signedPoints=computed(()=>checkinPoints(state.claims,month.value))
 function reward(tier:number){if(redeem(tier))toast.value=`演示领取成功：${CHECKIN_REWARDS.find(r=>r.days===tier)!.points}积分，未实际发放。`}
 </script>
@@ -55,7 +55,7 @@ function reward(tier:number){if(redeem(tier))toast.value=`演示领取成功：$
     <button class="back" @click="emit('back')">‹ 返回AI学习频道</button>
     <div class="heading"><div><p class="eyebrow">每一点进步，都值得记录</p><h1>我的学习</h1></div><span class="demo-tag">本地演示 · 奖励不实际发放</span></div>
     <div class="stats"><div><strong>{{ timeLabel(state.seconds[today]||0) }}</strong><span>今日学习</span></div><div><strong>{{ timeLabel(weekSeconds) }}</strong><span>本周学习</span></div><div><strong>{{ timeLabel(totalSeconds) }}</strong><span>累计学习</span></div><div><strong>{{ completed.size }}<small> 个</small></strong><span>学过的合集</span></div></div>
-    <nav class="tabs" aria-label="我的学习页签"><button v-for="name in ['签到与奖励','成长任务','学习排行榜','学习记录']" :key="name" :class="{selected:tab===name&&!studio}" @click="tab=name;studio=false">{{ name }}</button></nav>
+    <nav class="tabs" aria-label="我的学习页签"><button v-for="name in ['签到与奖励','成长任务','我的排名','学习记录']" :key="name" :class="{selected:tab===name&&!studio}" @click="tab=name;studio=false">{{ name }}</button></nav>
     <p v-if="toast" class="notice" role="status">{{ toast }} <button @click="toast=''" aria-label="关闭提示">×</button></p>
     <LearningStudio v-if="studio" mode="print" @close="studio=false" />
     <template v-else-if="tab==='签到与奖励'">
@@ -70,20 +70,19 @@ function reward(tier:number){if(redeem(tier))toast.value=`演示领取成功：$
       <section class="panel next"><div><h2>今天，学会一点新东西</h2><p class="muted">去逛逛AI算力工厂与办公提效，或分享你的第一条学习心得。</p></div><button @click="explore(true)">去热门专题 ›</button></section>
     </template>
     <section v-else-if="tab==='成长任务'" class="panel tasks">
-      <div class="section-head"><h2>从学习者，到分享者</h2><span class="points-total">已演示领取 {{ points }} 积分</span></div>
-      <p class="muted">完成任务领50—300积分 · 每项限领一次 · 新增奖励拟定，是否与社区原积分叠加待运营确认。</p>
-      <div class="growth-perks"><article><span class="perk-icon">✧</span><div><h3>定制3D打印手办 · 稼先周边</h3><p>月榜前20名有稼先周边 · 前10名另享手办半定制</p></div><button @click="studio=true">3D打印屋 ›</button></article></div>
-      <CommunityPoints />
-      <div class="section-head"><h3>我的成长任务</h3><span class="muted">{{ tasks.filter(t=>t.done).length }}/{{ tasks.length }} 项已完成</span></div>
-      <article v-for="(task,i) in tasks" :key="task.id" class="task"><span class="task-icon">{{ String(i+1).padStart(2,'0') }}</span><div class="task-copy"><h3>{{ task.name }} <span class="task-points">+{{ task.points }}积分</span></h3><p>{{ task.desc }}</p><small>{{ growth.taskClaims.includes(task.id)?'已演示领取 · 不重复发放':state.submissions[task.id]?'已演示提交 · 待审核':task.progress }}</small></div><button :class="{primary:task.done&&!growth.taskClaims.includes(task.id)}" :disabled="growth.taskClaims.includes(task.id)" @click="action(task.id)">{{ growth.taskClaims.includes(task.id)?'✓ 已领取':task.done?`领取${task.points}积分`:state.submissions[task.id]?'查看提交':task.action }}</button></article>
-      <p class="muted rule">学习类任务按本机演示记录判断，互动类任务须关联个人账号并审核后发奖；匿名内容不计。真实社区积分每天凌晨自动更新，严禁自动刷积分。本Demo不实际发放积分。</p>
+      <div class="section-head"><h2>学一点，做一点，领积分</h2><span class="points-total">已演示领取 {{ points }} 积分</span></div>
+      <p class="muted">{{ today }} · 每天00:00刷新（北京时间）· 每项每日限领一次 · 历史积分保留</p>
+      <article v-for="(task,i) in tasks" :key="task.id" class="task"><span class="task-icon">{{ String(i+1).padStart(2,'0') }}</span><div class="task-copy"><h3>{{ task.name }} <span class="task-points">+{{ task.points }}积分</span></h3><p>{{ task.desc }}</p><small>{{ claimed(task.id)?'今日已演示领取':submitted(task.id)?'今日已提交 · 待审核':task.progress }}</small></div><button :class="{primary:task.done&&!claimed(task.id)}" :disabled="claimed(task.id)" @click="action(task.id)">{{ claimed(task.id)?'✓ 今日已领取':task.done?`领取${task.points}积分`:submitted(task.id)?'查看提交':task.action }}</button></article>
+      <div class="task-footer"><button class="text-link" @click="tab='我的排名'">月榜前100名有礼 ›</button><span class="muted">🖨️ 3D打印屋待开放，敬请期待～</span></div>
+      <details class="task-rules"><summary>积分与任务规则</summary><p class="muted rule">本机演示中，成功复制分享链接或完成系统分享可计为分享，不代表已送达他人；正式版需核验。学习任务按站内模拟播放时长判断。建议与跟练帖仅能演示提交，审核接入前不可领积分。匿名内容不计，与原社区积分是否叠加待运营确认。本Demo不实际发奖。</p><CommunityPoints /></details>
     </section>
-    <LearningRanking v-else-if="tab==='学习排行榜'" @print="studio=true" />
+    <LearningRanking v-else-if="tab==='我的排名'||tab==='学习排行榜'" />
 <section v-else class="panel"><div class="section-head"><h2>我的学习足迹</h2><span class="muted">演示时长，仅保存在当前浏览器</span></div><nav class="record-tabs"><button v-for="name in ['最近学习','学过的合集','我的收藏']" :key="name" :class="{selected:recordTab===name}" @click="recordTab=name">{{ name }}</button></nav><p v-if="!list.length" class="empty">这里还没有记录，选一个喜欢的合集开始吧。<button @click="explore()">去学习</button></p><article v-for="r in list" :key="r.id" class="record"><img :src="coverFor(r)" alt=""/><div><h3>{{ r.title }} <DifficultyTag :difficulty="r.difficulty" :reason="r.difficultyReason" /></h3><p>{{ timeLabel(state.courses[r.id]||0) }}演示学习 · {{ isCompleted(r.id)?'手动标记学过':'尚未标记学过' }}</p></div><div class="record-actions"><button @click="open(r)">继续学习</button><button @click="toggleCompleted(r.id)">{{ isCompleted(r.id)?'取消学过':'标记学过' }}</button></div></article></section>
     <div v-if="submission" class="scrim" @click.self="submission=''"><section class="submission" role="dialog" aria-modal="true" aria-label="成长任务演示提交"><h2>{{ tasks.find(t=>t.id===submission)?.name }}</h2><p class="muted">本地演示，不会发布到真实社区，提交后等待审核。</p><label for="task-content">学习内容、收获或建议（至少10字）</label><textarea id="task-content" v-model="content" rows="6" maxlength="3000"></textarea><div class="submit-actions"><button @click="submission=''">取消</button><button class="primary" :disabled="content.trim().length<10" @click="submit">提交演示内容</button></div></section></div>
   </div>
 </template>
 <style scoped>
+.tasks .task{padding:13px 0;gap:14px}.tasks .task-icon{padding:9px;font-size:11px}.tasks .task-copy h3{font-size:14px;margin-bottom:5px}.tasks .task-copy p{font-size:12px;margin-bottom:3px}.tasks .task-copy small{font-size:11px}.task-footer{display:flex;justify-content:space-between;gap:12px;margin-top:16px}.task-rules{margin-top:12px;font-size:12px;color:var(--muted)}.task-rules summary{cursor:pointer}.tasks .task-points{font-size:11px;padding:2px 8px}@media(max-width:620px){.task-footer{flex-wrap:wrap}.tasks .task-copy{min-width:0}.tasks .task{gap:8px}}
 .growth-perks{grid-template-columns:1fr!important}.reward-timeline{height:132px!important}.timeline-node small{font-size:11px;color:var(--accent-ink)}@media(max-width:380px){.timeline-node{gap:6px!important}.timeline-node button{padding:5px 3px!important;font-size:10px!important}.timeline-node small{font-size:10px}}
 .points-total{font-size:13px;color:var(--accent-ink);font-weight:600}.task-points{display:inline-block;color:var(--accent-ink);font-size:12px;background:var(--surface-2);border:1px solid var(--accent-line);border-radius:16px;padding:3px 9px;margin-left:8px;white-space:nowrap}.growth-perks{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}.growth-perks article{display:flex;align-items:center;gap:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:18px}.growth-perks article>div{flex:1}.growth-perks p{font-size:11px;line-height:1.7;color:var(--muted);margin:6px 0 0}.growth-perks img{width:60px;height:60px;object-fit:contain;border-radius:13px;background:white}.perk-icon{display:grid;place-items:center;width:60px;height:60px;font-size:32px;color:var(--accent-ink);border:1px solid var(--accent-line);border-radius:13px}.growth-perks button{white-space:nowrap;padding:8px 10px}.growth-perks h3{font-size:14px}@media(max-width:900px){.growth-perks{grid-template-columns:1fr}}@media(max-width:620px){.task-points{margin:6px 0 0;display:table}.growth-perks article{padding:12px;gap:10px}.growth-perks img,.perk-icon{width:44px;height:44px}.task button{font-size:11px;padding:8px}}
 .reward-timeline{position:relative;margin:35px 38px 10px 8px;height:108px}.reward-timeline .track{margin-top:0;position:absolute;top:6px;left:0;right:0}.timeline-node{position:absolute;top:0;transform:translateX(-50%);display:flex;align-items:center;flex-direction:column;gap:8px;white-space:nowrap}.node-dot{height:18px;width:18px;border-radius:50%;background:var(--surface-3);border:2px solid var(--border);box-sizing:border-box;font-size:11px;text-align:center}.timeline-node b{font-size:12px;color:var(--muted)}.timeline-node button{font-size:11px;padding:6px 8px}.timeline-node.reached .node-dot{background:#52bba4;color:white;border-color:#52bba4}.timeline-node.reached b{color:var(--accent-ink)}.start-node{position:absolute;left:0;top:28px;color:var(--muted);font-size:12px}.tabs{overflow-x:auto}.tabs button{white-space:nowrap;flex:none}

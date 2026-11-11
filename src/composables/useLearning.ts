@@ -1,17 +1,18 @@
 import { computed, reactive, ref, watch } from 'vue'
 import type { Resource } from '../types'
 import { claim, monthCount, sign, streak } from '../utils/learning.mjs'
+import {minuteLabel} from '../utils/ranking.mjs'
 
-interface State { days: string[]; claims: string[]; seconds: Record<string, number>; courses: Record<string, number>; submissions: Record<string, string> }
+interface State { days: string[]; claims: string[]; seconds: Record<string, number>; courses: Record<string, number>; dailyCourses:Record<string,Record<string,number>>; submissions: Record<string, string> }
 const KEY = 'jiaxian.learning-center.v1'
-const initial = (): State => ({days:[], claims:[], seconds:{}, courses:{}, submissions:{}})
+const initial = (): State => ({days:[], claims:[], seconds:{}, courses:{},dailyCourses:{}, submissions:{}})
 function load(): State {
   try {
     const raw = JSON.parse(localStorage.getItem(KEY) || 'null')
     if (!raw) return initial()
     const strings = (v: unknown) => Array.isArray(v) ? v.filter((s): s is string => typeof s === 'string') : []
     const numbers = (v: unknown) => Object.fromEntries(Object.entries(v && typeof v === 'object' ? v : {}).filter(([,n]) => typeof n === 'number' && Number.isFinite(n) && n >= 0)) as Record<string,number>
-    return {days:strings(raw.days).filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)), claims:strings(raw.claims), seconds:numbers(raw.seconds), courses:numbers(raw.courses), submissions:Object.fromEntries(Object.entries(raw.submissions || {}).filter(([,v])=>typeof v==='string')) as Record<string,string>}
+    return {days:strings(raw.days).filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)), claims:strings(raw.claims), seconds:numbers(raw.seconds), courses:numbers(raw.courses),dailyCourses:Object.fromEntries(Object.entries(raw.dailyCourses||{}).filter(([day])=>/^\d{4}-\d{2}-\d{2}$/.test(day)).map(([day,items])=>[day,numbers(items)])), submissions:Object.fromEntries(Object.entries(raw.submissions || {}).filter(([,v])=>typeof v==='string')) as Record<string,string>}
   } catch { return initial() }
 }
 const state = reactive(load())
@@ -27,6 +28,8 @@ export function useLearning() {
     refresh()
     state.seconds[today.value] = (state.seconds[today.value] || 0) + seconds
     state.courses[resource.id] = (state.courses[resource.id] || 0) + seconds
+    state.dailyCourses[today.value] ||= {}
+    state.dailyCourses[today.value]![resource.id]=(state.dailyCourses[today.value]![resource.id]||0)+seconds
     if (sessionSeconds >= 3) checkin()
   }
   return {state, active, today, month, refresh, checkin, record,
@@ -38,7 +41,5 @@ export function useLearning() {
   }
 }
 export function timeLabel(seconds: number) {
-  if (seconds < 60) return `${Math.floor(seconds)}秒`
-  if (seconds < 3600) return `${Math.floor(seconds/60)}分钟`
-  return `${Math.floor(seconds/3600)}小时${Math.floor(seconds%3600/60)}分钟`
+  return minuteLabel(seconds)
 }

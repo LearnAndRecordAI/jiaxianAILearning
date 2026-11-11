@@ -72,16 +72,17 @@ const emptyHint = computed(() =>
 </template>
 
 <style scoped>
-.factory-section{padding:12px 0 16px;scroll-margin-top:90px}
-.section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px;min-height:26px}
+.factory-section{padding:4px 0 8px;scroll-margin-top:90px}
+.factory-section+.factory-section{margin-top:4px}
+.section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px;min-height:22px}
 .section-heading h2{font-size:18px;margin:0;color:var(--ink);line-height:1.25}
-.view-all{border:1px solid var(--border);border-radius:8px;padding:6px 11px;background:var(--surface);color:var(--ink-2);font-size:12px;cursor:pointer;white-space:nowrap}
+.view-all{border:1px solid var(--border);border-radius:6px;padding:3px 9px;background:var(--surface);color:var(--ink-2);font-size:12px;cursor:pointer;white-space:nowrap}
 .view-all:hover{border-color:var(--accent-line);color:var(--accent-ink)}
 .view-all span{margin-left:5px}
 .factory-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:start}
 .factory-row>*{min-width:0}
 .section-empty{padding:24px;color:var(--muted);background:var(--surface);border:1px dashed var(--border-strong);border-radius:12px;font-size:14px;margin:0}
-@media(max-width:620px){.factory-section{scroll-margin-top:75px;padding:10px 0 12px}.section-heading h2{font-size:16px}.factory-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
+@media(max-width:620px){.factory-section{scroll-margin-top:75px;padding:3px 0 6px}.section-heading h2{font-size:16px}.factory-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
 .home {
   padding-bottom: 40px;
 }
